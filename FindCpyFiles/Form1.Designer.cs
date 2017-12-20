@@ -104,6 +104,7 @@
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "Form1";
             this.Text = "findCpyFiles";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);

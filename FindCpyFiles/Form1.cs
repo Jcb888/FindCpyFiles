@@ -315,10 +315,10 @@ namespace FindCpyFiles
         //    }
         //}
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            creatXML();
-        }
+        //private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    creatXML();
+        //}
 
         public void creatXML()
         {
@@ -402,6 +402,11 @@ namespace FindCpyFiles
             {
                 ajouterWorkinglistCombo();
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            creatXML();
         }
     }
 
