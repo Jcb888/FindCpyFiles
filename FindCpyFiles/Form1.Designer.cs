@@ -28,12 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.comboBoxWorkingDirectory = new System.Windows.Forms.ComboBox();
+            this.buttonPathSource = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // comboBoxWorkingDirectory
+            // 
+            this.comboBoxWorkingDirectory.FormattingEnabled = true;
+            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(77, 46);
+            this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
+            this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxWorkingDirectory.TabIndex = 0;
+            // 
+            // buttonPathSource
+            // 
+            this.buttonPathSource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPathSource.Location = new System.Drawing.Point(204, 44);
+            this.buttonPathSource.Name = "buttonPathSource";
+            this.buttonPathSource.Size = new System.Drawing.Size(30, 23);
+            this.buttonPathSource.TabIndex = 1;
+            this.buttonPathSource.Text = "...";
+            this.buttonPathSource.UseVisualStyleBackColor = true;
+            this.buttonPathSource.Click += new System.EventHandler(this.buttonPathSource_Click);
+            // 
+            // Form1
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.buttonPathSource);
+            this.Controls.Add(this.comboBoxWorkingDirectory);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem paramToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBoxWorkingDirectory;
+        private System.Windows.Forms.Button buttonPathSource;
     }
 }
 
