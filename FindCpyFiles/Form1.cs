@@ -19,19 +19,22 @@ namespace FindCpyFiles
         string appDataArterris = "";//c'est dans ce repertoire qu'on a les droits et qu'il convient d'écrire
         string appdata = "";//son ss rep.
         static configObject co = new configObject();
+        Form2 fp = new Form2();
+        
 
         public Form1()
         {
             InitializeComponent();
+            fp.Tag = this;
             appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             appDataArterris = Path.Combine(appdata, "Arterris");
             XmlSerializer xs = new XmlSerializer(typeof(configObject));//pour serialiser en XML la config (sauvegarde des paths src et dst)
             co.ListRepertoire2Travail = new List<comboItem>();
-            co.ListPatternARechercher = new List<comboItem>();
+            co.ListPathDestination = new List<comboItem>();
             co.listNouveauPrefix = new List<comboItem>();
 
             co.strRepertoire2Travail = "";
-            co.strPatternARechercher = "";
+            co.strPathDestination = "";
             co.strNouveauPrefix = "";
 
             if (!Directory.Exists(appDataArterris))
@@ -44,8 +47,8 @@ namespace FindCpyFiles
                 comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
 
 
-                co.ListPatternARechercher.Add(new comboItem("1", @""));
-                co.strPatternARechercher = "";
+                co.ListPathDestination.Add(new comboItem("1", @""));
+                co.strPathDestination = "";
                 //comboBoxTxt2Change.Text = co.strPatternARechercher;
 
                 co.listNouveauPrefix.Add(new comboItem("1", @"k:\"));
@@ -77,11 +80,11 @@ namespace FindCpyFiles
         {
 
             co.ListRepertoire2Travail.ForEach(i => comboBoxWorkingDirectory.Items.Add(i));
-            //co.ListPatternARechercher.ForEach(i => comboBoxTxt2Change.Items.Add(i));
+            co.ListPathDestination.ForEach(i => comboBoxdestination.Items.Add(i));
             //co.listNouveauPrefix.ForEach(i => comboBoxNouveauPrefix.Items.Add(i));
 
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
-            //comboBoxTxt2Change.Text = co.strPatternARechercher;
+            comboBoxdestination.Text = co.strPathDestination;
             //comboBoxNouveauPrefix.Text = co.strNouveauPrefix;
 
         }
@@ -256,31 +259,31 @@ namespace FindCpyFiles
             }
         }
 
-        private void comboBoxWorkingDirectory_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                ajouterWorkinglistCombo();
-            }
-        }
-
-        //private void ajouterPatternArechercherListCombo()
+        //private void comboBoxWorkingDirectory_KeyDown(object sender, KeyEventArgs e)
         //{
-
-        //    bool b = co.ListPatternARechercher.Any(tr => tr.myValue.Equals(comboBoxTxt2Change.Text, StringComparison.CurrentCultureIgnoreCase));
-        //    if (!b)
+        //    if (e.KeyCode == Keys.Enter)
         //    {
-        //        //String str = comboBoxTxt2Change.Text;
-        //        //Char.ToUpper(str[0]);
-        //        //comboBoxTxt2Change.Text = str;
-
-        //        //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
-        //        comboItem ci = new comboItem(((co.ListPatternARechercher.Count) + 1).ToString(), comboBoxTxt2Change.Text);
-        //        co.ListPatternARechercher.Add(ci);
-        //        comboBoxTxt2Change.Items.Add(ci);
-        //        comboBoxTxt2Change.SelectedIndex = comboBoxTxt2Change.FindStringExact(ci.myValue);
+        //        ajouterWorkinglistCombo();
         //    }
         //}
+
+        private void ajouterPathDestListCombo()
+        {
+
+            bool b = co.ListPathDestination.Any(tr => tr.myValue.Equals(comboBoxdestination.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
+            {
+                //String str = comboBoxTxt2Change.Text;
+                //Char.ToUpper(str[0]);
+                //comboBoxTxt2Change.Text = str;
+
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.ListPathDestination.Count) + 1).ToString(), comboBoxdestination.Text);
+                co.ListPathDestination.Add(ci);
+                comboBoxdestination.Items.Add(ci);
+                comboBoxdestination.SelectedIndex = comboBoxdestination.FindStringExact(ci.myValue);
+            }
+        }
 
         //private void comboBoxTxt2Change_KeyDown(object sender, KeyEventArgs e)
         //{
@@ -373,7 +376,33 @@ namespace FindCpyFiles
             }
         }
 
-       
+        private void buttonPathDest_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.SelectedPath = this.comboBoxdestination.Text;
+
+            DialogResult result = fbd.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(fbd.SelectedPath))
+            {
+                comboBoxdestination.Text = fbd.SelectedPath.ToString();
+            }
+
+            ajouterPathDestListCombo();
+        }
+
+        private void parametresRechercheToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fp.Show();
+        }
+
+        private void comboBoxWorkingDirectory_KeyDown(object sender, KeyEventArgs e)
+        {
+          if (e.KeyCode == Keys.Enter)
+            {
+                ajouterWorkinglistCombo();
+            }
+        }
     }
 
 
@@ -388,10 +417,10 @@ namespace FindCpyFiles
         }
 
         public String strRepertoire2Travail;
-        public String strPatternARechercher;
+        public String strPathDestination;
         public String strNouveauPrefix;
         public List<comboItem> ListRepertoire2Travail;
-        public List<comboItem> ListPatternARechercher;
+        public List<comboItem> ListPathDestination;
         public List<comboItem> listNouveauPrefix;
     }
 
