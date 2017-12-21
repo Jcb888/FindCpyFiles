@@ -63,6 +63,7 @@
             this.checkBoxtest2.TabIndex = 2;
             this.checkBoxtest2.Text = "et contient :";
             this.checkBoxtest2.UseVisualStyleBackColor = true;
+            this.checkBoxtest2.CheckedChanged += new System.EventHandler(this.checkBoxtest2_CheckedChanged);
             // 
             // comboBoxContient
             // 

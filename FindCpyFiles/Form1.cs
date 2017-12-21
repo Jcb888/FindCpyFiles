@@ -51,7 +51,7 @@ namespace FindCpyFiles
 
 
                 co.ListPathDestination.Add(new comboItem("1", @""));
-                co.strPathDestination = "";
+                co.strPathDestination = @"c:\temp";
                 comboBoxdestination.Text = co.strPathDestination;
 
                 co.listCommencePar.Add(new comboItem("1", "test"));
@@ -172,12 +172,42 @@ namespace FindCpyFiles
 
         //}
 
-        private void traiterFichierEnCours(String fichierLNK)
+        private void traiterFichierEnCours(String fichier)
         {
+            bool t1 = true;
+            bool t2 = true;
+
+            string firstLine = System.IO.File.ReadLines(fichier).First();
+
+            if (co.checkTest1)
+            {
+                if(/*fichier commence par*/true)
+                {
+                    t1 = true;
+                }
+                else
+                {
+                    t1 = false ;
+                }
+            }
+
+            if (co.checkTest2)
+            {
+                if (/*fichier contient*/true)
+                {
+                    t1 = true;
+                }
+                else
+                {
+                    t1 = false;
+                }
+            }
 
 
-           // ChangeLinkTarget(fichierLNK);
-
+            if (t1 && t2)
+            {
+                //ajouter à la liste de sfichiers à copier
+            }
 
 
         }
@@ -289,13 +319,25 @@ namespace FindCpyFiles
             }
         }
 
-        //private void comboBoxWorkingDirectory_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        ajouterWorkinglistCombo();
-        //    }
-        //}
+        private void ajouterDestinationlistCombo()
+        {
+            if (!Directory.Exists(comboBoxdestination.Text))
+            {
+                MessageBox.Show("Ce repertoire est introuvable : " + comboBoxdestination.Text);
+                return;
+            }
+
+            bool b = co.ListPathDestination.Any(tr => tr.myValue.Equals(comboBoxdestination.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
+            {
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.ListPathDestination.Count) + 1).ToString(), comboBoxdestination.Text);
+                co.ListPathDestination.Add(ci);
+                comboBoxdestination.Items.Add(ci);
+                comboBoxdestination.SelectedIndex = comboBoxdestination.FindStringExact(ci.myValue);
+            }
+        }
+
 
         private void ajouterPathDestListCombo()
         {
@@ -315,25 +357,6 @@ namespace FindCpyFiles
             }
         }
 
-        //private void comboBoxTxt2Change_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        ajouterPatternArechercherListCombo();
-        //    }
-        //}
-
-        
-
-        //private void comboBoxNouveauPrefix_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        ajouterNouveauPrefixListCombo();
-        //    }
-        //}
-
-        
 
         public void creatXML()
         {
@@ -361,27 +384,7 @@ namespace FindCpyFiles
 
         }
 
-        //private void buttonSupStr2Replace_Click(object sender, EventArgs e)
-        //{
-        //    if (comboBoxTxt2Change.SelectedIndex != -1)
-        //    {
-        //        co.ListPatternARechercher.RemoveAll(x => x.myValue.Contains(this.comboBoxTxt2Change.Text));
-        //        comboBoxTxt2Change.Items.RemoveAt(comboBoxTxt2Change.SelectedIndex);
-        //    }
-
-
-        //}
-
-        //private void buttonSupNouveauPrefix_Click(object sender, EventArgs e)
-        //{
-        //    if (comboBoxNouveauPrefix.SelectedIndex != -1)
-        //    {
-        //        co.listNouveauPrefix.RemoveAll(x => x.myValue.Contains(this.comboBoxNouveauPrefix.Text));
-        //        comboBoxNouveauPrefix.Items.RemoveAt(comboBoxNouveauPrefix.SelectedIndex);
-        //    }
-
-        //}
-
+       
         private void buttonDeleteRep2W_Click(object sender, EventArgs e)
         {
             if (comboBoxWorkingDirectory.SelectedIndex != -1)
@@ -426,7 +429,75 @@ namespace FindCpyFiles
 
         private void buttonExecuter_Click_1(object sender, EventArgs e)
         {
+            
+            if (co.checkTest1)
+            {
+                //tester sur commence par
+            }
 
+            if (!Directory.Exists(comboBoxWorkingDirectory.Text))
+            {
+                MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxWorkingDirectory.Text);
+                return;
+            }
+            // recup de la liste des fichier .asc du repertoire de la combobox 
+            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxWorkingDirectory.SelectedItem).Value, "*.");
+
+            for (int i = 0; i < tabFiles.Length; i++)
+            {
+               
+              traiterFichierEnCours(tabFiles[i]);
+               
+            }
+
+            if (checkBoxSimulation.Checked)
+            {
+                //afficher fenetre avec fichier
+            }
+            else
+            {
+                // File.Copy(); laliste des fichiers
+            }
+
+
+
+                try
+            {
+                System.Diagnostics.Process.Start("explorer.exe", comboBoxWorkingDirectory.Text);
+            }
+            catch (Exception e2)
+            {
+
+                MessageBox.Show(e2.StackTrace);
+            }
+
+
+        }
+
+        private void comboBoxdestination_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ajouterDestinationlistCombo();
+            }
+        }
+
+        private void buttonSupWorking_Click(object sender, EventArgs e)
+        {
+            if (comboBoxWorkingDirectory.SelectedIndex != -1)
+            {
+                co.ListRepertoire2Travail.RemoveAll(x => x.myValue.Contains(this.comboBoxWorkingDirectory.Text));
+                comboBoxWorkingDirectory.Items.RemoveAt(comboBoxWorkingDirectory.SelectedIndex);
+            }
+        }
+
+        private void buttonSupDestination_Click(object sender, EventArgs e)
+        {
+            if (comboBoxdestination.SelectedIndex != -1)
+            {
+                co.ListPathDestination.RemoveAll(x => x.myValue.Contains(this.comboBoxdestination.Text));
+                comboBoxdestination.Items.RemoveAt(comboBoxdestination.SelectedIndex);
+            }
         }
     }
 

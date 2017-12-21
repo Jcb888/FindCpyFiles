@@ -35,13 +35,16 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.parametresRechercheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonExecuter = new System.Windows.Forms.Button();
+            this.buttonSupWorking = new System.Windows.Forms.Button();
+            this.buttonSupDestination = new System.Windows.Forms.Button();
+            this.checkBoxSimulation = new System.Windows.Forms.CheckBox();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxWorkingDirectory
             // 
             this.comboBoxWorkingDirectory.FormattingEnabled = true;
-            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 46);
+            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 64);
             this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
             this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(366, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
@@ -50,7 +53,7 @@
             // buttonPathSource
             // 
             this.buttonPathSource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPathSource.Location = new System.Drawing.Point(410, 46);
+            this.buttonPathSource.Location = new System.Drawing.Point(384, 62);
             this.buttonPathSource.Name = "buttonPathSource";
             this.buttonPathSource.Size = new System.Drawing.Size(30, 23);
             this.buttonPathSource.TabIndex = 1;
@@ -61,15 +64,16 @@
             // comboBoxdestination
             // 
             this.comboBoxdestination.FormattingEnabled = true;
-            this.comboBoxdestination.Location = new System.Drawing.Point(12, 86);
+            this.comboBoxdestination.Location = new System.Drawing.Point(12, 104);
             this.comboBoxdestination.Name = "comboBoxdestination";
             this.comboBoxdestination.Size = new System.Drawing.Size(366, 21);
             this.comboBoxdestination.TabIndex = 2;
+            this.comboBoxdestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxdestination_KeyDown);
             // 
             // buttonPathDest
             // 
             this.buttonPathDest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPathDest.Location = new System.Drawing.Point(410, 86);
+            this.buttonPathDest.Location = new System.Drawing.Point(384, 104);
             this.buttonPathDest.Name = "buttonPathDest";
             this.buttonPathDest.Size = new System.Drawing.Size(30, 23);
             this.buttonPathDest.TabIndex = 3;
@@ -104,9 +108,44 @@
             this.buttonExecuter.UseVisualStyleBackColor = true;
             this.buttonExecuter.Click += new System.EventHandler(this.buttonExecuter_Click_1);
             // 
+            // buttonSupWorking
+            // 
+            this.buttonSupWorking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSupWorking.Location = new System.Drawing.Point(420, 62);
+            this.buttonSupWorking.Name = "buttonSupWorking";
+            this.buttonSupWorking.Size = new System.Drawing.Size(37, 23);
+            this.buttonSupWorking.TabIndex = 6;
+            this.buttonSupWorking.Text = "Sup";
+            this.buttonSupWorking.UseVisualStyleBackColor = true;
+            this.buttonSupWorking.Click += new System.EventHandler(this.buttonSupWorking_Click);
+            // 
+            // buttonSupDestination
+            // 
+            this.buttonSupDestination.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSupDestination.Location = new System.Drawing.Point(420, 104);
+            this.buttonSupDestination.Name = "buttonSupDestination";
+            this.buttonSupDestination.Size = new System.Drawing.Size(37, 23);
+            this.buttonSupDestination.TabIndex = 7;
+            this.buttonSupDestination.Text = "Sup";
+            this.buttonSupDestination.UseVisualStyleBackColor = true;
+            this.buttonSupDestination.Click += new System.EventHandler(this.buttonSupDestination_Click);
+            // 
+            // checkBoxSimulation
+            // 
+            this.checkBoxSimulation.AutoSize = true;
+            this.checkBoxSimulation.Location = new System.Drawing.Point(173, 27);
+            this.checkBoxSimulation.Name = "checkBoxSimulation";
+            this.checkBoxSimulation.Size = new System.Drawing.Size(74, 17);
+            this.checkBoxSimulation.TabIndex = 8;
+            this.checkBoxSimulation.Text = "Simulation";
+            this.checkBoxSimulation.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(481, 221);
+            this.Controls.Add(this.checkBoxSimulation);
+            this.Controls.Add(this.buttonSupDestination);
+            this.Controls.Add(this.buttonSupWorking);
             this.Controls.Add(this.buttonExecuter);
             this.Controls.Add(this.buttonPathDest);
             this.Controls.Add(this.comboBoxdestination);
@@ -135,6 +174,9 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem parametresRechercheToolStripMenuItem;
         private System.Windows.Forms.Button buttonExecuter;
+        private System.Windows.Forms.Button buttonSupWorking;
+        private System.Windows.Forms.Button buttonSupDestination;
+        private System.Windows.Forms.CheckBox checkBoxSimulation;
     }
 }
 

@@ -17,7 +17,7 @@ namespace FindCpyFiles
         public Form2()
         {
             InitializeComponent();
-            //fpere = (Form1)this.Tag;
+            
         }
 
         private void checkBoxTest1_CheckedChanged(object sender, EventArgs e)
@@ -30,10 +30,7 @@ namespace FindCpyFiles
         {
             fpere = (Form1) this.Tag; 
         }
-        //private void Form2_Load(object sender, EventArgs e)
-        //{
-        //    this.Hide();
-        //}
+        
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -42,6 +39,12 @@ namespace FindCpyFiles
                 e.Cancel = true;
                 this.Hide();
             }
+        }
+
+        private void checkBoxtest2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fpere != null)
+                fpere.setCOcheckTest2(checkBoxtest2.Checked);
         }
     }
 }
