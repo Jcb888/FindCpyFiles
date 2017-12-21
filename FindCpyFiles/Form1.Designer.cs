@@ -34,6 +34,7 @@
             this.buttonPathDest = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.parametresRechercheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonExecuter = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,9 +94,20 @@
             this.parametresRechercheToolStripMenuItem.Text = "Paramètres recherche";
             this.parametresRechercheToolStripMenuItem.Click += new System.EventHandler(this.parametresRechercheToolStripMenuItem_Click);
             // 
+            // buttonExecuter
+            // 
+            this.buttonExecuter.Location = new System.Drawing.Point(173, 150);
+            this.buttonExecuter.Name = "buttonExecuter";
+            this.buttonExecuter.Size = new System.Drawing.Size(75, 23);
+            this.buttonExecuter.TabIndex = 5;
+            this.buttonExecuter.Text = "Executer";
+            this.buttonExecuter.UseVisualStyleBackColor = true;
+            this.buttonExecuter.Click += new System.EventHandler(this.buttonExecuter_Click_1);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(481, 221);
+            this.Controls.Add(this.buttonExecuter);
             this.Controls.Add(this.buttonPathDest);
             this.Controls.Add(this.comboBoxdestination);
             this.Controls.Add(this.buttonPathSource);
@@ -122,6 +134,7 @@
         private System.Windows.Forms.Button buttonPathDest;
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem parametresRechercheToolStripMenuItem;
+        private System.Windows.Forms.Button buttonExecuter;
     }
 }
 

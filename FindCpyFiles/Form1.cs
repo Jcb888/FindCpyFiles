@@ -18,7 +18,7 @@ namespace FindCpyFiles
         // Les variables globals au formulaire
         string appDataArterris = "";//c'est dans ce repertoire qu'on a les droits et qu'il convient d'écrire
         string appdata = "";//son ss rep.
-        static configObject co = new configObject();
+        public static configObject co = new configObject();
         Form2 fp = new Form2();
         
 
@@ -26,36 +26,49 @@ namespace FindCpyFiles
         {
             InitializeComponent();
             fp.Tag = this;
+            fp.setRef();
             appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             appDataArterris = Path.Combine(appdata, "Arterris");
             XmlSerializer xs = new XmlSerializer(typeof(configObject));//pour serialiser en XML la config (sauvegarde des paths src et dst)
             co.ListRepertoire2Travail = new List<comboItem>();
             co.ListPathDestination = new List<comboItem>();
-            co.listNouveauPrefix = new List<comboItem>();
+            co.listCommencePar = new List<comboItem>();
+            co.ListContient = new List<comboItem>();
 
             co.strRepertoire2Travail = "";
             co.strPathDestination = "";
-            co.strNouveauPrefix = "";
+            co.strCommencePar = "";
+            co.strContient = "";
 
             if (!Directory.Exists(appDataArterris))
                 Directory.CreateDirectory(appDataArterris);
 
             if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
-                co.ListRepertoire2Travail.Add(new comboItem("1", @"c:\temp\lnk"));
-                co.strRepertoire2Travail = "c:\\temp\\lnk";
+                co.ListRepertoire2Travail.Add(new comboItem("1", @"c:\temp"));
+                co.strRepertoire2Travail = "c:\\temp";
                 comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
 
 
                 co.ListPathDestination.Add(new comboItem("1", @""));
                 co.strPathDestination = "";
-                //comboBoxTxt2Change.Text = co.strPatternARechercher;
+                comboBoxdestination.Text = co.strPathDestination;
 
-                co.listNouveauPrefix.Add(new comboItem("1", @"k:\"));
-                co.strNouveauPrefix = @"k:\";
-                //comboBoxNouveauPrefix.Text = co.strNouveauPrefix;
+                co.listCommencePar.Add(new comboItem("1", "test"));
+                co.strCommencePar = "test";
+                fp.comboBoxCommencePar.Text = co.strCommencePar;
 
-                if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//si le fichier n'existe pas on le cré avec init à "";
+                co.ListContient.Add(new comboItem("1", "test"));
+                co.strContient = "test";
+                fp.comboBoxContient.Text = co.strContient;
+
+                co.checkTest1 = true;
+                fp.checkBoxTest1.Checked = co.checkTest1;
+
+                co.checkTest2 = true;
+                fp.checkBoxtest2.Checked = co.checkTest2;
+
+                if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//creation
                 {
 
                     using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configFindFiles.xml"))
@@ -75,72 +88,89 @@ namespace FindCpyFiles
 
             remplirCombo();
         }
-
+        
         public void remplirCombo()
         {
 
             co.ListRepertoire2Travail.ForEach(i => comboBoxWorkingDirectory.Items.Add(i));
             co.ListPathDestination.ForEach(i => comboBoxdestination.Items.Add(i));
-            //co.listNouveauPrefix.ForEach(i => comboBoxNouveauPrefix.Items.Add(i));
+            co.listCommencePar.ForEach(i => fp.comboBoxCommencePar.Items.Add(i));
+            co.ListContient.ForEach(i => fp.comboBoxContient.Items.Add(i));
 
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
             comboBoxdestination.Text = co.strPathDestination;
-            //comboBoxNouveauPrefix.Text = co.strNouveauPrefix;
+            fp.comboBoxCommencePar.Text = co.strCommencePar;
+            fp.comboBoxContient.Text = co.strContient;
+
+            fp.checkBoxTest1.Checked = co.checkTest1;
+            fp.checkBoxtest2.Checked = co.checkTest2;
 
         }
 
-
-        private void buttonExecuter_Click(object sender, EventArgs e)
+        public void setCOcheckTest1(bool b)
         {
-
-            if (!Directory.Exists(comboBoxWorkingDirectory.Text))
-            {
-                MessageBox.Show("Ce repertoire de travail n'existe pas : " + comboBoxWorkingDirectory.Text);
-                return;
-            }
-            // recup de la liste des fichier .asc du repertoire de la combobox 
-            string[] tabFiles = Directory.GetFileSystemEntries(comboBoxWorkingDirectory.Text, "*.lnk");
-
-            if (tabFiles.Length < 1)
-            {
-                MessageBox.Show("Aucun fichier .lnk trouvé dans : " + comboBoxWorkingDirectory.Text);
-                return;
-            }
-
-            //if (checkBoxAffichageSeule.Checked == true)
-            //{
-
-            //    FormAffichage fa = new FormAffichage();
-            //    fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
-            //    fa.textBox1.Text = "REPERTOIRE DE TRAVAIL: " + Path.GetDirectoryName(tabFiles[0]);
-            //    fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
-
-            //    for (int i = 0; i < tabFiles.Length; i++)
-            //    {
-            //        traiterSimulationFichierEnCours(tabFiles[i], fa);
-            //    }
-            //    fa.Show();
-            //}
-            else
-            {
-                for (int i = 0; i < tabFiles.Length; i++)
-                {
-                    traiterFichierEnCours(tabFiles[i]);
-                }
-
-                try
-                {
-                    System.Diagnostics.Process.Start("explorer.exe", comboBoxWorkingDirectory.Text);
-                }
-                catch (Exception e2)
-                {
-
-                    MessageBox.Show(e2.StackTrace);
-                }
-            }
-
+            co.checkTest1 = b;
 
         }
+
+        public void setCOcheckTest2(bool b)
+        {
+            co.checkTest2 = b;
+
+        }
+
+
+        //private void buttonExecuter_Click(object sender, EventArgs e)
+        //{
+
+        //    if (!Directory.Exists(comboBoxWorkingDirectory.Text))
+        //    {
+        //        MessageBox.Show("Ce repertoire de travail n'existe pas : " + comboBoxWorkingDirectory.Text);
+        //        return;
+        //    }
+        //    // recup de la liste des fichier .asc du repertoire de la combobox 
+        //    string[] tabFiles = Directory.GetFileSystemEntries(comboBoxWorkingDirectory.Text, "*.lnk");
+
+        //    if (tabFiles.Length < 1)
+        //    {
+        //        MessageBox.Show("Aucun fichier .lnk trouvé dans : " + comboBoxWorkingDirectory.Text);
+        //        return;
+        //    }
+
+        //    //if (checkBoxAffichageSeule.Checked == true)
+        //    //{
+
+        //    //    FormAffichage fa = new FormAffichage();
+        //    //    fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
+        //    //    fa.textBox1.Text = "REPERTOIRE DE TRAVAIL: " + Path.GetDirectoryName(tabFiles[0]);
+        //    //    fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
+
+        //    //    for (int i = 0; i < tabFiles.Length; i++)
+        //    //    {
+        //    //        traiterSimulationFichierEnCours(tabFiles[i], fa);
+        //    //    }
+        //    //    fa.Show();
+        //    //}
+        //    else
+        //    {
+        //        for (int i = 0; i < tabFiles.Length; i++)
+        //        {
+        //            traiterFichierEnCours(tabFiles[i]);
+        //        }
+
+        //        try
+        //        {
+        //            System.Diagnostics.Process.Start("explorer.exe", comboBoxWorkingDirectory.Text);
+        //        }
+        //        catch (Exception e2)
+        //        {
+
+        //            MessageBox.Show(e2.StackTrace);
+        //        }
+        //    }
+
+
+        //}
 
         private void traiterFichierEnCours(String fichierLNK)
         {
@@ -293,19 +323,7 @@ namespace FindCpyFiles
         //    }
         //}
 
-        //private void ajouterNouveauPrefixListCombo()
-        //{
-
-        //    bool b = co.listNouveauPrefix.Any(tr => tr.myValue.Equals(comboBoxNouveauPrefix.Text, StringComparison.CurrentCultureIgnoreCase));
-        //    if (!b)
-        //    {
-        //        //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
-        //        comboItem ci = new comboItem(((co.listNouveauPrefix.Count) + 1).ToString(), comboBoxNouveauPrefix.Text);
-        //        co.listNouveauPrefix.Add(ci);
-        //        comboBoxNouveauPrefix.Items.Add(ci);
-        //        comboBoxNouveauPrefix.SelectedIndex = comboBoxNouveauPrefix.FindStringExact(ci.myValue);
-        //    }
-        //}
+        
 
         //private void comboBoxNouveauPrefix_KeyDown(object sender, KeyEventArgs e)
         //{
@@ -315,10 +333,7 @@ namespace FindCpyFiles
         //    }
         //}
 
-        //private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    creatXML();
-        //}
+        
 
         public void creatXML()
         {
@@ -408,6 +423,11 @@ namespace FindCpyFiles
         {
             creatXML();
         }
+
+        private void buttonExecuter_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
@@ -421,12 +441,18 @@ namespace FindCpyFiles
 
         }
 
+
+        public bool checkTest1;
+        public bool checkTest2;
         public String strRepertoire2Travail;
         public String strPathDestination;
-        public String strNouveauPrefix;
+        public String strCommencePar;
+        public String strContient;
         public List<comboItem> ListRepertoire2Travail;
         public List<comboItem> ListPathDestination;
-        public List<comboItem> listNouveauPrefix;
+        public List<comboItem> listCommencePar;
+        public List<comboItem> ListContient;
+
     }
 
     [Serializable]
