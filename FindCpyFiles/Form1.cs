@@ -20,7 +20,7 @@ namespace FindCpyFiles
         string appdata = "";//son ss rep.
         public static configObject co = new configObject();
         Form2 fp = new Form2();
-        
+        List<String> ListFilesToCopy = new List<string>();
 
         public Form1()
         {
@@ -119,69 +119,16 @@ namespace FindCpyFiles
 
         }
 
-
-        //private void buttonExecuter_Click(object sender, EventArgs e)
-        //{
-
-        //    if (!Directory.Exists(comboBoxWorkingDirectory.Text))
-        //    {
-        //        MessageBox.Show("Ce repertoire de travail n'existe pas : " + comboBoxWorkingDirectory.Text);
-        //        return;
-        //    }
-        //    // recup de la liste des fichier .asc du repertoire de la combobox 
-        //    string[] tabFiles = Directory.GetFileSystemEntries(comboBoxWorkingDirectory.Text, "*.lnk");
-
-        //    if (tabFiles.Length < 1)
-        //    {
-        //        MessageBox.Show("Aucun fichier .lnk trouvé dans : " + comboBoxWorkingDirectory.Text);
-        //        return;
-        //    }
-
-        //    //if (checkBoxAffichageSeule.Checked == true)
-        //    //{
-
-        //    //    FormAffichage fa = new FormAffichage();
-        //    //    fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
-        //    //    fa.textBox1.Text = "REPERTOIRE DE TRAVAIL: " + Path.GetDirectoryName(tabFiles[0]);
-        //    //    fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
-
-        //    //    for (int i = 0; i < tabFiles.Length; i++)
-        //    //    {
-        //    //        traiterSimulationFichierEnCours(tabFiles[i], fa);
-        //    //    }
-        //    //    fa.Show();
-        //    //}
-        //    else
-        //    {
-        //        for (int i = 0; i < tabFiles.Length; i++)
-        //        {
-        //            traiterFichierEnCours(tabFiles[i]);
-        //        }
-
-        //        try
-        //        {
-        //            System.Diagnostics.Process.Start("explorer.exe", comboBoxWorkingDirectory.Text);
-        //        }
-        //        catch (Exception e2)
-        //        {
-
-        //            MessageBox.Show(e2.StackTrace);
-        //        }
-        //    }
-
-
-        //}
-
         private void traiterFichierEnCours(String fichier)
         {
             bool t1 = true;
             bool t2 = true;
 
-            string firstLine = System.IO.File.ReadLines(fichier).First();
+            string Line1 = System.IO.File.ReadLines(fichier).First();
 
             if (co.checkTest1)
             {
-                if(/*fichier commence par*/true)
+                if(Line1.StartsWith(fp.comboBoxCommencePar.Text))
                 {
                     t1 = true;
                 }
@@ -193,7 +140,7 @@ namespace FindCpyFiles
 
             if (co.checkTest2)
             {
-                if (/*fichier contient*/true)
+                if (Line1.Contains(fp.comboBoxContient.Text))
                 {
                     t1 = true;
                 }
@@ -206,82 +153,11 @@ namespace FindCpyFiles
 
             if (t1 && t2)
             {
-                //ajouter à la liste de sfichiers à copier
+                ListFilesToCopy.Add(fichier);
             }
 
 
         }
-
-
-        //[STAThread]
-        //private void traiterSimulationFichierEnCours(String shortcutFullPath, FormAffichage fa)
-        //{
-
-        //    // Load the shortcut.
-        //    Shell32.Shell shell = new Shell32.Shell();
-        //    Shell32.Folder folder = shell.NameSpace(Path.GetDirectoryName(shortcutFullPath));
-        //    Shell32.FolderItem folderItem = folder.Items().Item(Path.GetFileName(shortcutFullPath));
-        //    Shell32.ShellLinkObject currentLink = (Shell32.ShellLinkObject)folderItem.GetLink;
-
-
-
-
-        //    if (currentLink.Path.Contains(comboBoxTxt2Change.Text))
-        //    {
-
-        //        fa.textBox1.AppendText(Environment.NewLine);
-        //        fa.textBox1.AppendText(currentLink.Path);
-
-        //        currentLink.Save();
-
-        //    }
-
-
-
-
-        //}
-
-        //[STAThread]
-        //public void ChangeLinkTarget(string shortcutFullPath)
-        //{
-        //    // ToDo verif combo pas vide si possible avant
-        //    // ToDo sauver .lnk avant changement
-
-        //    // Load the shortcut.
-        //    Shell32.Shell shell = new Shell32.Shell();
-        //    Shell32.Folder folder = shell.NameSpace(Path.GetDirectoryName(shortcutFullPath));
-        //    Shell32.FolderItem folderItem = folder.Items().Item(Path.GetFileName(shortcutFullPath));
-        //    Shell32.ShellLinkObject currentLink = (Shell32.ShellLinkObject)folderItem.GetLink;
-
-        //    if (currentLink.Path.Contains(comboBoxTxt2Change.Text))
-        //    {
-        //        // ici creer repertoire sauvegarde selon etat marqeur ou test existance
-        //        String sRepSauvegardeAncien = Path.Combine(comboBoxWorkingDirectory.Text, "sauveOldLNK");
-        //        String sRepSauvegardeNouveau = Path.Combine(comboBoxWorkingDirectory.Text, "sauveNewLNK");
-        //        String sNomFichier = Path.GetFileName(shortcutFullPath);
-        //        String sDirectoryPath = Path.GetDirectoryName(shortcutFullPath);
-
-        //        if (!Directory.Exists(sRepSauvegardeAncien))
-        //            Directory.CreateDirectory(sRepSauvegardeAncien);
-
-        //        if (!Directory.Exists(sRepSauvegardeNouveau))
-        //            Directory.CreateDirectory(sRepSauvegardeNouveau);
-
-        //        // sauvegarder le lnk
-
-        //        File.Copy(shortcutFullPath, sRepSauvegardeAncien + "\\" + sNomFichier, true);
-        //        //changer le repertoire de travail
-        //        currentLink.WorkingDirectory = currentLink.WorkingDirectory.Replace(comboBoxTxt2Change.Text, comboBoxNouveauPrefix.Text);
-
-        //        // Assign the new path here. This value is not read-only.
-        //        currentLink.Path = currentLink.Path.Replace(comboBoxTxt2Change.Text, comboBoxNouveauPrefix.Text);
-        //        // Save the link to commit the changes.
-        //        currentLink.Save();
-        //        File.Copy(shortcutFullPath, sRepSauvegardeNouveau + "\\" + sNomFichier, true);
-        //    }
-
-        //    //fermer le liens ? 
-        //}
 
         private void buttonPathSource_Click(object sender, EventArgs e)
         {
@@ -345,11 +221,7 @@ namespace FindCpyFiles
             bool b = co.ListPathDestination.Any(tr => tr.myValue.Equals(comboBoxdestination.Text, StringComparison.CurrentCultureIgnoreCase));
             if (!b)
             {
-                //String str = comboBoxTxt2Change.Text;
-                //Char.ToUpper(str[0]);
-                //comboBoxTxt2Change.Text = str;
-
-                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                
                 comboItem ci = new comboItem(((co.ListPathDestination.Count) + 1).ToString(), comboBoxdestination.Text);
                 co.ListPathDestination.Add(ci);
                 comboBoxdestination.Items.Add(ci);
@@ -430,11 +302,6 @@ namespace FindCpyFiles
         private void buttonExecuter_Click_1(object sender, EventArgs e)
         {
             
-            if (co.checkTest1)
-            {
-                //tester sur commence par
-            }
-
             if (!Directory.Exists(comboBoxWorkingDirectory.Text))
             {
                 MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxWorkingDirectory.Text);
@@ -450,9 +317,19 @@ namespace FindCpyFiles
                
             }
 
-            if (checkBoxSimulation.Checked)
+            if (checkBoxSimulation.Checked == true)
             {
-                //afficher fenetre avec fichier
+
+                FormAffichage fa = new FormAffichage();
+                fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
+                fa.textBox1.Text = "REPERTOIRE DE TRAVAIL: " + Path.GetDirectoryName(tabFiles[0]);
+                fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
+
+                for (int i = 0; i < tabFiles.Length; i++)
+                {
+                    //traiterSimulationFichierEnCours(tabFiles[i], fa);
+                }
+                fa.Show();
             }
             else
             {

@@ -46,16 +46,15 @@
             this.comboBoxWorkingDirectory.FormattingEnabled = true;
             this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 64);
             this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
-            this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(366, 21);
+            this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(304, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
             this.comboBoxWorkingDirectory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxWorkingDirectory_KeyDown);
             // 
             // buttonPathSource
             // 
-            this.buttonPathSource.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPathSource.Location = new System.Drawing.Point(384, 62);
+            this.buttonPathSource.Location = new System.Drawing.Point(322, 62);
             this.buttonPathSource.Name = "buttonPathSource";
-            this.buttonPathSource.Size = new System.Drawing.Size(30, 23);
+            this.buttonPathSource.Size = new System.Drawing.Size(27, 23);
             this.buttonPathSource.TabIndex = 1;
             this.buttonPathSource.Text = "...";
             this.buttonPathSource.UseVisualStyleBackColor = true;
@@ -66,16 +65,15 @@
             this.comboBoxdestination.FormattingEnabled = true;
             this.comboBoxdestination.Location = new System.Drawing.Point(12, 104);
             this.comboBoxdestination.Name = "comboBoxdestination";
-            this.comboBoxdestination.Size = new System.Drawing.Size(366, 21);
+            this.comboBoxdestination.Size = new System.Drawing.Size(304, 21);
             this.comboBoxdestination.TabIndex = 2;
             this.comboBoxdestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxdestination_KeyDown);
             // 
             // buttonPathDest
             // 
-            this.buttonPathDest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPathDest.Location = new System.Drawing.Point(384, 104);
+            this.buttonPathDest.Location = new System.Drawing.Point(322, 104);
             this.buttonPathDest.Name = "buttonPathDest";
-            this.buttonPathDest.Size = new System.Drawing.Size(30, 23);
+            this.buttonPathDest.Size = new System.Drawing.Size(27, 23);
             this.buttonPathDest.TabIndex = 3;
             this.buttonPathDest.Text = "...";
             this.buttonPathDest.UseVisualStyleBackColor = true;
@@ -87,12 +85,13 @@
             this.parametresRechercheToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(481, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(400, 24);
             this.menuStrip2.TabIndex = 4;
             this.menuStrip2.Text = "menuStrip2";
             // 
             // parametresRechercheToolStripMenuItem
             // 
+            this.parametresRechercheToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.parametresRechercheToolStripMenuItem.Name = "parametresRechercheToolStripMenuItem";
             this.parametresRechercheToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
             this.parametresRechercheToolStripMenuItem.Text = "Paramètres recherche";
@@ -110,30 +109,28 @@
             // 
             // buttonSupWorking
             // 
-            this.buttonSupWorking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSupWorking.Location = new System.Drawing.Point(420, 62);
+            this.buttonSupWorking.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
+            this.buttonSupWorking.Location = new System.Drawing.Point(355, 62);
             this.buttonSupWorking.Name = "buttonSupWorking";
-            this.buttonSupWorking.Size = new System.Drawing.Size(37, 23);
+            this.buttonSupWorking.Size = new System.Drawing.Size(27, 23);
             this.buttonSupWorking.TabIndex = 6;
-            this.buttonSupWorking.Text = "Sup";
             this.buttonSupWorking.UseVisualStyleBackColor = true;
             this.buttonSupWorking.Click += new System.EventHandler(this.buttonSupWorking_Click);
             // 
             // buttonSupDestination
             // 
-            this.buttonSupDestination.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSupDestination.Location = new System.Drawing.Point(420, 104);
+            this.buttonSupDestination.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
+            this.buttonSupDestination.Location = new System.Drawing.Point(355, 104);
             this.buttonSupDestination.Name = "buttonSupDestination";
-            this.buttonSupDestination.Size = new System.Drawing.Size(37, 23);
+            this.buttonSupDestination.Size = new System.Drawing.Size(27, 23);
             this.buttonSupDestination.TabIndex = 7;
-            this.buttonSupDestination.Text = "Sup";
             this.buttonSupDestination.UseVisualStyleBackColor = true;
             this.buttonSupDestination.Click += new System.EventHandler(this.buttonSupDestination_Click);
             // 
             // checkBoxSimulation
             // 
             this.checkBoxSimulation.AutoSize = true;
-            this.checkBoxSimulation.Location = new System.Drawing.Point(173, 27);
+            this.checkBoxSimulation.Location = new System.Drawing.Point(12, 7);
             this.checkBoxSimulation.Name = "checkBoxSimulation";
             this.checkBoxSimulation.Size = new System.Drawing.Size(74, 17);
             this.checkBoxSimulation.TabIndex = 8;
@@ -142,7 +139,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(481, 221);
+            this.ClientSize = new System.Drawing.Size(400, 194);
             this.Controls.Add(this.checkBoxSimulation);
             this.Controls.Add(this.buttonSupDestination);
             this.Controls.Add(this.buttonSupWorking);
