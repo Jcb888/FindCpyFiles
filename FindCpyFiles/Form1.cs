@@ -119,27 +119,69 @@ namespace FindCpyFiles
 
         }
 
+        public void ajouterListCommencePar()
+        {
+
+            if (fp.comboBoxCommencePar.Text == "")
+            {
+                MessageBox.Show("la chaine est vide sortie ");
+                return;
+            }
+
+            bool b = co.listCommencePar.Any(tr => tr.myValue.Equals(fp.comboBoxCommencePar.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
+            {
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.listCommencePar.Count) + 1).ToString(), fp.comboBoxCommencePar.Text);
+                co.listCommencePar.Add(ci);
+                fp.comboBoxCommencePar.Items.Add(ci);
+                fp.comboBoxCommencePar.SelectedIndex = fp.comboBoxCommencePar.FindStringExact(ci.myValue);
+            }
+        }
+
+        public void ajouterListContient()
+        {
+
+            if (fp.comboBoxContient.Text == "" )
+            {
+                MessageBox.Show("la chaine est vide sortie ");
+                return;
+            }
+
+            bool b = co.ListContient.Any(tr => tr.myValue.Equals(fp.comboBoxContient.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
+            {
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.ListContient.Count) + 1).ToString(), fp.comboBoxContient.Text);
+                co.ListContient.Add(ci);
+                fp.comboBoxContient.Items.Add(ci);
+                fp.comboBoxContient.SelectedIndex = fp.comboBoxContient.FindStringExact(ci.myValue);
+            }
+        }
+
         private void traiterFichierEnCours(String fichier)
         {
-            bool t1 = true;
+            bool t1 = true;//si on ne test pas alors dans tous les cas c'est true
             bool t2 = true;
 
             string Line1 = System.IO.File.ReadLines(fichier).First();
 
             if (co.checkTest1)
             {
-                if(Line1.StartsWith(fp.comboBoxCommencePar.Text))
+                
+                if (Line1.StartsWith(fp.comboBoxCommencePar.Text))
                 {
                     t1 = true;
                 }
                 else
                 {
-                    t1 = false ;
+                    t1 = false ;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
                 }
             }
 
             if (co.checkTest2)
             {
+               
                 if (Line1.Contains(fp.comboBoxContient.Text))
                 {
                     t1 = true;
@@ -307,8 +349,24 @@ namespace FindCpyFiles
                 MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxWorkingDirectory.Text);
                 return;
             }
+
+            if (fp.comboBoxCommencePar.Text == "" && fp.checkBoxTest1.Checked)
+            {
+                MessageBox.Show("Le texte commence par est vide sortie");
+                return;
+            }
+
+            if (fp.comboBoxContient.Text == "" && fp.checkBoxtest2.Checked)
+            {
+                MessageBox.Show("texte à chercher vide sortie");
+                return;
+            }
+
             // recup de la liste des fichier .asc du repertoire de la combobox 
-            string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxWorkingDirectory.SelectedItem).Value, "*.");
+
+            //string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxWorkingDirectory.SelectedItem).Value, "*.");
+
+            string[] tabFiles = Directory.GetFiles(comboBoxWorkingDirectory.Text, "*.");
 
             for (int i = 0; i < tabFiles.Length; i++)
             {
@@ -322,18 +380,26 @@ namespace FindCpyFiles
 
                 FormAffichage fa = new FormAffichage();
                 fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
-                fa.textBox1.Text = "REPERTOIRE DE TRAVAIL: " + Path.GetDirectoryName(tabFiles[0]);
+                fa.textBox1.Text = "CORRESPONDANCES TROUVEE DANS REPERTOIRE SOURCE : " + Path.GetDirectoryName(tabFiles[0]);
                 fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
 
-                for (int i = 0; i < tabFiles.Length; i++)
+                foreach (var item in ListFilesToCopy)
                 {
-                    //traiterSimulationFichierEnCours(tabFiles[i], fa);
+                    fa.textBox1.Text = item;
                 }
                 fa.Show();
             }
             else
             {
-                // File.Copy(); laliste des fichiers
+                DateTime dt = DateTime.Now;
+                String destinationDIR = comboBoxdestination.Text + "//" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second ;
+                Directory.CreateDirectory(destinationDIR);
+                foreach (var item in ListFilesToCopy)
+                {
+                    string destination = Path.Combine(comboBoxdestination.Text, destinationDIR, Path.GetFileName(item));
+                    File.Copy(item,destination,true);
+                }
+                
             }
 
 
@@ -365,6 +431,7 @@ namespace FindCpyFiles
             {
                 co.ListRepertoire2Travail.RemoveAll(x => x.myValue.Contains(this.comboBoxWorkingDirectory.Text));
                 comboBoxWorkingDirectory.Items.RemoveAt(comboBoxWorkingDirectory.SelectedIndex);
+                comboBoxWorkingDirectory.SelectedIndex = 0;
             }
         }
 
@@ -374,6 +441,7 @@ namespace FindCpyFiles
             {
                 co.ListPathDestination.RemoveAll(x => x.myValue.Contains(this.comboBoxdestination.Text));
                 comboBoxdestination.Items.RemoveAt(comboBoxdestination.SelectedIndex);
+                comboBoxdestination.SelectedIndex = 0;
             }
         }
     }

@@ -33,6 +33,7 @@
             this.checkBoxtest2 = new System.Windows.Forms.CheckBox();
             this.comboBoxContient = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.labelEnter = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxTest1
@@ -53,6 +54,7 @@
             this.comboBoxCommencePar.Name = "comboBoxCommencePar";
             this.comboBoxCommencePar.Size = new System.Drawing.Size(241, 21);
             this.comboBoxCommencePar.TabIndex = 1;
+            this.comboBoxCommencePar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxCommencePar_KeyDown);
             // 
             // checkBoxtest2
             // 
@@ -72,22 +74,33 @@
             this.comboBoxContient.Name = "comboBoxContient";
             this.comboBoxContient.Size = new System.Drawing.Size(241, 21);
             this.comboBoxContient.TabIndex = 3;
+            this.comboBoxContient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxContient_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 91);
+            this.label1.Location = new System.Drawing.Point(9, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(320, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "Alors copier ce fichier dans destination";
             // 
+            // labelEnter
+            // 
+            this.labelEnter.AutoSize = true;
+            this.labelEnter.Location = new System.Drawing.Point(188, 68);
+            this.labelEnter.Name = "labelEnter";
+            this.labelEnter.Size = new System.Drawing.Size(200, 13);
+            this.labelEnter.TabIndex = 5;
+            this.labelEnter.Text = "[enter] Pour valider et enregistrer la saisie";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 131);
+            this.ClientSize = new System.Drawing.Size(473, 145);
+            this.Controls.Add(this.labelEnter);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxContient);
             this.Controls.Add(this.checkBoxtest2);
@@ -95,6 +108,7 @@
             this.Controls.Add(this.checkBoxTest1);
             this.Name = "Form2";
             this.Text = "Paramètres";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,5 +121,6 @@
         public System.Windows.Forms.CheckBox checkBoxtest2;
         public System.Windows.Forms.ComboBox comboBoxContient;
         public System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelEnter;
     }
 }

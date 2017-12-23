@@ -31,20 +31,37 @@ namespace FindCpyFiles
             fpere = (Form1) this.Tag; 
         }
         
+        private void checkBoxtest2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (fpere != null)
+                fpere.setCOcheckTest2(checkBoxtest2.Checked);
+        }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void comboBoxCommencePar_KeyDown(object sender, KeyEventArgs e)
+        {
+            string s = comboBoxCommencePar.Text;
+            if (e.KeyCode == Keys.Enter)
+            {
+                fpere.ajouterListCommencePar();
+            }
+        }
+
+        private void comboBoxContient_KeyDown(object sender, KeyEventArgs e)
+        {
+            string s = comboBoxContient.Text;
+            if (e.KeyCode == Keys.Enter)
+            {
+                fpere.ajouterListContient();
+            }
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
                 this.Hide();
             }
-        }
-
-        private void checkBoxtest2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (fpere != null)
-                fpere.setCOcheckTest2(checkBoxtest2.Checked);
         }
     }
 }
