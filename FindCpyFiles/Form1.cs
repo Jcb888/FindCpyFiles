@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.IO;
 
+// ToDo charger par defaut dernier utilisé.
+// ToDo supprimer item fenetre fille
+
 namespace FindCpyFiles
 {
     public partial class Form1 : Form
@@ -34,7 +37,7 @@ namespace FindCpyFiles
             co.ListPathDestination = new List<comboItem>();
             co.listCommencePar = new List<comboItem>();
             co.ListContient = new List<comboItem>();
-
+            co.bSousRepDest = true;
             co.strRepertoire2Travail = "";
             co.strPathDestination = "";
             co.strCommencePar = "";
@@ -67,6 +70,9 @@ namespace FindCpyFiles
 
                 co.checkTest2 = true;
                 fp.checkBoxtest2.Checked = co.checkTest2;
+
+                co.bSousRepDest = true;
+                checkBoxSousRep.Checked = true;
 
                 if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//creation
                 {
@@ -104,6 +110,7 @@ namespace FindCpyFiles
 
             fp.checkBoxTest1.Checked = co.checkTest1;
             fp.checkBoxtest2.Checked = co.checkTest2;
+            checkBoxSousRep.Checked = co.bSousRepDest;
 
         }
 
@@ -134,6 +141,7 @@ namespace FindCpyFiles
                 //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
                 comboItem ci = new comboItem(((co.listCommencePar.Count) + 1).ToString(), fp.comboBoxCommencePar.Text);
                 co.listCommencePar.Add(ci);
+                co.strCommencePar = fp.comboBoxCommencePar.Text;
                 fp.comboBoxCommencePar.Items.Add(ci);
                 fp.comboBoxCommencePar.SelectedIndex = fp.comboBoxCommencePar.FindStringExact(ci.myValue);
             }
@@ -154,6 +162,7 @@ namespace FindCpyFiles
                 //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
                 comboItem ci = new comboItem(((co.ListContient.Count) + 1).ToString(), fp.comboBoxContient.Text);
                 co.ListContient.Add(ci);
+                co.strContient = fp.comboBoxContient.Text;
                 fp.comboBoxContient.Items.Add(ci);
                 fp.comboBoxContient.SelectedIndex = fp.comboBoxContient.FindStringExact(ci.myValue);
             }
@@ -385,19 +394,38 @@ namespace FindCpyFiles
 
                 foreach (var item in ListFilesToCopy)
                 {
-                    fa.textBox1.Text = item;
+
+                    fa.textBox1.AppendText(item);
                 }
                 fa.Show();
             }
             else
             {
                 DateTime dt = DateTime.Now;
-                String destinationDIR = comboBoxdestination.Text + "//" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second ;
-                Directory.CreateDirectory(destinationDIR);
+                String destinationDIR = "";
+                if (checkBoxSousRep.Checked)
+                {
+                    destinationDIR = comboBoxdestination.Text + "//" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second;
+                    Directory.CreateDirectory(destinationDIR);
+                }
+                else
+                {
+                    destinationDIR = comboBoxdestination.Text;
+                }
+               
                 foreach (var item in ListFilesToCopy)
                 {
                     string destination = Path.Combine(comboBoxdestination.Text, destinationDIR, Path.GetFileName(item));
-                    File.Copy(item,destination,true);
+
+                    try
+                    {
+                        File.Copy(item, destination, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erreur lors de la sauvegarde des paramètres: " + ex.StackTrace.ToString());
+                    }
+                    
                 }
                 
             }
@@ -444,6 +472,12 @@ namespace FindCpyFiles
                 comboBoxdestination.SelectedIndex = 0;
             }
         }
+
+        private void checkBoxSousRep_CheckedChanged(object sender, EventArgs e)
+        {
+            co.bSousRepDest = checkBoxSousRep.Checked;
+        }
+
     }
 
 
@@ -460,6 +494,7 @@ namespace FindCpyFiles
 
         public bool checkTest1;
         public bool checkTest2;
+        public bool bSousRepDest;
         public String strRepertoire2Travail;
         public String strPathDestination;
         public String strCommencePar;

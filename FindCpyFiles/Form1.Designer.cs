@@ -38,13 +38,14 @@
             this.buttonSupWorking = new System.Windows.Forms.Button();
             this.buttonSupDestination = new System.Windows.Forms.Button();
             this.checkBoxSimulation = new System.Windows.Forms.CheckBox();
+            this.checkBoxSousRep = new System.Windows.Forms.CheckBox();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxWorkingDirectory
             // 
             this.comboBoxWorkingDirectory.FormattingEnabled = true;
-            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 64);
+            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 42);
             this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
             this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(304, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
@@ -52,7 +53,7 @@
             // 
             // buttonPathSource
             // 
-            this.buttonPathSource.Location = new System.Drawing.Point(322, 62);
+            this.buttonPathSource.Location = new System.Drawing.Point(322, 40);
             this.buttonPathSource.Name = "buttonPathSource";
             this.buttonPathSource.Size = new System.Drawing.Size(27, 23);
             this.buttonPathSource.TabIndex = 1;
@@ -63,7 +64,7 @@
             // comboBoxdestination
             // 
             this.comboBoxdestination.FormattingEnabled = true;
-            this.comboBoxdestination.Location = new System.Drawing.Point(12, 104);
+            this.comboBoxdestination.Location = new System.Drawing.Point(12, 81);
             this.comboBoxdestination.Name = "comboBoxdestination";
             this.comboBoxdestination.Size = new System.Drawing.Size(304, 21);
             this.comboBoxdestination.TabIndex = 2;
@@ -71,7 +72,7 @@
             // 
             // buttonPathDest
             // 
-            this.buttonPathDest.Location = new System.Drawing.Point(322, 104);
+            this.buttonPathDest.Location = new System.Drawing.Point(322, 79);
             this.buttonPathDest.Name = "buttonPathDest";
             this.buttonPathDest.Size = new System.Drawing.Size(27, 23);
             this.buttonPathDest.TabIndex = 3;
@@ -99,7 +100,7 @@
             // 
             // buttonExecuter
             // 
-            this.buttonExecuter.Location = new System.Drawing.Point(173, 150);
+            this.buttonExecuter.Location = new System.Drawing.Point(182, 132);
             this.buttonExecuter.Name = "buttonExecuter";
             this.buttonExecuter.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuter.TabIndex = 5;
@@ -110,7 +111,7 @@
             // buttonSupWorking
             // 
             this.buttonSupWorking.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
-            this.buttonSupWorking.Location = new System.Drawing.Point(355, 62);
+            this.buttonSupWorking.Location = new System.Drawing.Point(355, 40);
             this.buttonSupWorking.Name = "buttonSupWorking";
             this.buttonSupWorking.Size = new System.Drawing.Size(27, 23);
             this.buttonSupWorking.TabIndex = 6;
@@ -120,7 +121,7 @@
             // buttonSupDestination
             // 
             this.buttonSupDestination.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
-            this.buttonSupDestination.Location = new System.Drawing.Point(355, 104);
+            this.buttonSupDestination.Location = new System.Drawing.Point(355, 79);
             this.buttonSupDestination.Name = "buttonSupDestination";
             this.buttonSupDestination.Size = new System.Drawing.Size(27, 23);
             this.buttonSupDestination.TabIndex = 7;
@@ -137,9 +138,21 @@
             this.checkBoxSimulation.Text = "Simulation";
             this.checkBoxSimulation.UseVisualStyleBackColor = true;
             // 
+            // checkBoxSousRep
+            // 
+            this.checkBoxSousRep.AutoSize = true;
+            this.checkBoxSousRep.Location = new System.Drawing.Point(92, 7);
+            this.checkBoxSousRep.Name = "checkBoxSousRep";
+            this.checkBoxSousRep.Size = new System.Drawing.Size(165, 17);
+            this.checkBoxSousRep.TabIndex = 9;
+            this.checkBoxSousRep.Text = "Créer ss rep. dans destination";
+            this.checkBoxSousRep.UseVisualStyleBackColor = true;
+            this.checkBoxSousRep.CheckedChanged += new System.EventHandler(this.checkBoxSousRep_CheckedChanged);
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(400, 194);
+            this.ClientSize = new System.Drawing.Size(400, 178);
+            this.Controls.Add(this.checkBoxSousRep);
             this.Controls.Add(this.checkBoxSimulation);
             this.Controls.Add(this.buttonSupDestination);
             this.Controls.Add(this.buttonSupWorking);
@@ -174,6 +187,7 @@
         private System.Windows.Forms.Button buttonSupWorking;
         private System.Windows.Forms.Button buttonSupDestination;
         private System.Windows.Forms.CheckBox checkBoxSimulation;
+        private System.Windows.Forms.CheckBox checkBoxSousRep;
     }
 }
 

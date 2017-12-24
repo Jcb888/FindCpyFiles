@@ -57,6 +57,9 @@ namespace FindCpyFiles
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
+            fpere.ajouterListCommencePar();
+            fpere.ajouterListContient();
+
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
