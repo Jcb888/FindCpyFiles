@@ -137,6 +137,7 @@
             this.checkBoxSimulation.TabIndex = 8;
             this.checkBoxSimulation.Text = "Simulation";
             this.checkBoxSimulation.UseVisualStyleBackColor = true;
+            this.checkBoxSimulation.CheckedChanged += new System.EventHandler(this.checkBoxSimulation_CheckedChanged);
             // 
             // checkBoxSousRep
             // 
@@ -164,6 +165,7 @@
             this.Controls.Add(this.menuStrip2);
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "findCpyFiles";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip2.ResumeLayout(false);

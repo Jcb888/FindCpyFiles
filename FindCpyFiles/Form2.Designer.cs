@@ -34,6 +34,8 @@
             this.comboBoxContient = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.labelEnter = new System.Windows.Forms.Label();
+            this.buttonCommencePar = new System.Windows.Forms.Button();
+            this.buttonContient = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkBoxTest1
@@ -43,7 +45,7 @@
             this.checkBoxTest1.Name = "checkBoxTest1";
             this.checkBoxTest1.Size = new System.Drawing.Size(168, 17);
             this.checkBoxTest1.TabIndex = 0;
-            this.checkBoxTest1.Text = "Si la 1er ligne commance par :";
+            this.checkBoxTest1.Text = "Si la 1er ligne commence par :";
             this.checkBoxTest1.UseVisualStyleBackColor = true;
             this.checkBoxTest1.CheckedChanged += new System.EventHandler(this.checkBoxTest1_CheckedChanged);
             // 
@@ -95,11 +97,33 @@
             this.labelEnter.TabIndex = 5;
             this.labelEnter.Text = "[enter] Pour valider et enregistrer la saisie";
             // 
+            // buttonCommencePar
+            // 
+            this.buttonCommencePar.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
+            this.buttonCommencePar.Location = new System.Drawing.Point(436, 13);
+            this.buttonCommencePar.Name = "buttonCommencePar";
+            this.buttonCommencePar.Size = new System.Drawing.Size(25, 23);
+            this.buttonCommencePar.TabIndex = 6;
+            this.buttonCommencePar.UseVisualStyleBackColor = true;
+            this.buttonCommencePar.Click += new System.EventHandler(this.buttonCommencePar_Click);
+            // 
+            // buttonContient
+            // 
+            this.buttonContient.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
+            this.buttonContient.Location = new System.Drawing.Point(436, 42);
+            this.buttonContient.Name = "buttonContient";
+            this.buttonContient.Size = new System.Drawing.Size(25, 23);
+            this.buttonContient.TabIndex = 7;
+            this.buttonContient.UseVisualStyleBackColor = true;
+            this.buttonContient.Click += new System.EventHandler(this.buttonContient_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 145);
+            this.Controls.Add(this.buttonContient);
+            this.Controls.Add(this.buttonCommencePar);
             this.Controls.Add(this.labelEnter);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxContient);
@@ -107,6 +131,7 @@
             this.Controls.Add(this.comboBoxCommencePar);
             this.Controls.Add(this.checkBoxTest1);
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paramètres";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.ResumeLayout(false);
@@ -122,5 +147,7 @@
         public System.Windows.Forms.ComboBox comboBoxContient;
         public System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelEnter;
+        private System.Windows.Forms.Button buttonCommencePar;
+        private System.Windows.Forms.Button buttonContient;
     }
 }

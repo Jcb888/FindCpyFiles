@@ -74,6 +74,9 @@ namespace FindCpyFiles
                 co.bSousRepDest = true;
                 checkBoxSousRep.Checked = true;
 
+                co.bSimulation = false;
+                checkBoxSimulation.Checked = co.bSimulation;
+
                 if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//creation
                 {
 
@@ -95,6 +98,11 @@ namespace FindCpyFiles
             remplirCombo();
         }
         
+        public configObject getCO()
+        {
+            return co;
+        }
+
         public void remplirCombo()
         {
 
@@ -111,7 +119,7 @@ namespace FindCpyFiles
             fp.checkBoxTest1.Checked = co.checkTest1;
             fp.checkBoxtest2.Checked = co.checkTest2;
             checkBoxSousRep.Checked = co.bSousRepDest;
-
+            checkBoxSimulation.Checked = co.bSimulation;
         }
 
         public void setCOcheckTest1(bool b)
@@ -193,11 +201,11 @@ namespace FindCpyFiles
                
                 if (Line1.Contains(fp.comboBoxContient.Text))
                 {
-                    t1 = true;
+                    t2 = true;
                 }
                 else
                 {
-                    t1 = false;
+                    t2 = false;
                 }
             }
 
@@ -286,6 +294,9 @@ namespace FindCpyFiles
 
             if (co == null)//un min de verif qd mm
                 return;
+
+            co.strCommencePar = fp.comboBoxCommencePar.Text;
+            co.strContient = fp.comboBoxContient.Text;
 
             try
             {
@@ -376,6 +387,7 @@ namespace FindCpyFiles
             //string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxWorkingDirectory.SelectedItem).Value, "*.");
 
             string[] tabFiles = Directory.GetFiles(comboBoxWorkingDirectory.Text, "*.");
+            ListFilesToCopy.Clear();
 
             for (int i = 0; i < tabFiles.Length; i++)
             {
@@ -384,20 +396,29 @@ namespace FindCpyFiles
                
             }
 
+            if(ListFilesToCopy.Count < 1)
+            {
+                MessageBox.Show("Aucune correspondance trouvée");
+                return;
+            }
+
+
             if (checkBoxSimulation.Checked == true)
             {
 
                 FormAffichage fa = new FormAffichage();
                 fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
-                fa.textBox1.Text = "CORRESPONDANCES TROUVEE DANS REPERTOIRE SOURCE : " + Path.GetDirectoryName(tabFiles[0]);
+                fa.textBox1.Text = "Correspondances trouvées dans " + Path.GetDirectoryName(tabFiles[0])+ " :";
                 fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
+
 
                 foreach (var item in ListFilesToCopy)
                 {
-
+                    fa.textBox1.AppendText(Environment.NewLine);
                     fa.textBox1.AppendText(item);
                 }
                 fa.Show();
+                return;
             }
             else
             {
@@ -405,7 +426,7 @@ namespace FindCpyFiles
                 String destinationDIR = "";
                 if (checkBoxSousRep.Checked)
                 {
-                    destinationDIR = comboBoxdestination.Text + "//" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second;
+                    destinationDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second;
                     Directory.CreateDirectory(destinationDIR);
                 }
                 else
@@ -421,11 +442,55 @@ namespace FindCpyFiles
                     {
                         File.Copy(item, destination, false);
                     }
+
+                    catch(UnauthorizedAccessException ueae)
+                    {
+                        MessageBox.Show("Acces non authorise : " + ueae.StackTrace.ToString());
+                    } 
+
+                    catch (ArgumentNullException ane)
+                    {
+                        MessageBox.Show("un des chemins est vide : " + ane.StackTrace.ToString());
+                    }
+
+                    catch (ArgumentException ae)
+                    {
+                        MessageBox.Show("erreur dans les chemins passés en paramètre : " + ae.StackTrace.ToString());
+                    }
+
+                    catch (PathTooLongException atle)
+                    {
+                        MessageBox.Show("un des chemins est trop long : " + atle.StackTrace.ToString());
+
+                    }
+
+                    catch (DirectoryNotFoundException dnfe)
+                    {
+                        MessageBox.Show("Un  des chemins n'existe pas : " + dnfe.StackTrace.ToString());
+                    }
+
+                    catch (FileNotFoundException fnfe)
+                    {
+                        MessageBox.Show("Le fichier source non trouve : " + fnfe.StackTrace.ToString());
+                    }
+
+                    catch (IOException ioe)
+                    {
+                        MessageBox.Show("destFileName existe ou erreur d’ES : " + ioe.StackTrace.ToString());
+                    }
+
+                    catch (NotSupportedException nse)
+                    {
+                        MessageBox.Show("sourceFileName ou destFileName a un format non valide. : " + nse.StackTrace.ToString());
+                    }
+
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Erreur lors de la sauvegarde des paramètres: " + ex.StackTrace.ToString());
+                        MessageBox.Show("Erreur lors de la copie: " + ex.StackTrace.ToString());
                     }
+                   
                     
+
                 }
                 
             }
@@ -459,6 +524,8 @@ namespace FindCpyFiles
             {
                 co.ListRepertoire2Travail.RemoveAll(x => x.myValue.Contains(this.comboBoxWorkingDirectory.Text));
                 comboBoxWorkingDirectory.Items.RemoveAt(comboBoxWorkingDirectory.SelectedIndex);
+                if (comboBoxWorkingDirectory.Items.Count < 1)
+                    return;
                 comboBoxWorkingDirectory.SelectedIndex = 0;
             }
         }
@@ -478,6 +545,10 @@ namespace FindCpyFiles
             co.bSousRepDest = checkBoxSousRep.Checked;
         }
 
+        private void checkBoxSimulation_CheckedChanged(object sender, EventArgs e)
+        {
+            co.bSimulation = checkBoxSimulation.Checked;
+        }
     }
 
 
@@ -495,6 +566,7 @@ namespace FindCpyFiles
         public bool checkTest1;
         public bool checkTest2;
         public bool bSousRepDest;
+        public bool bSimulation;
         public String strRepertoire2Travail;
         public String strPathDestination;
         public String strCommencePar;

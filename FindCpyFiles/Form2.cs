@@ -66,5 +66,28 @@ namespace FindCpyFiles
                 this.Hide();
             }
         }
+
+        private void buttonCommencePar_Click(object sender, EventArgs e)
+        {
+
+            if (comboBoxCommencePar.SelectedIndex != -1)
+            {
+                fpere.getCO().listCommencePar.RemoveAll(x => x.myValue.Contains(this.comboBoxCommencePar.Text));
+                comboBoxCommencePar.Items.RemoveAt(comboBoxCommencePar.SelectedIndex);
+                comboBoxCommencePar.SelectedIndex = 0;
+            }
+        }
+
+        private void buttonContient_Click(object sender, EventArgs e)
+        {
+
+            if (comboBoxContient.SelectedIndex != -1)
+            {
+                fpere.getCO().ListContient.RemoveAll(x => x.myValue.Contains(this.comboBoxContient.Text));
+                comboBoxContient.Items.RemoveAt(comboBoxContient.SelectedIndex);
+                comboBoxContient.SelectedIndex = 0;
+            }
+
+        }
     }
 }
