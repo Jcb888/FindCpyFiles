@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.checkBoxTest1 = new System.Windows.Forms.CheckBox();
             this.comboBoxCommencePar = new System.Windows.Forms.ComboBox();
             this.checkBoxtest2 = new System.Windows.Forms.CheckBox();
@@ -130,6 +131,7 @@
             this.Controls.Add(this.checkBoxtest2);
             this.Controls.Add(this.comboBoxCommencePar);
             this.Controls.Add(this.checkBoxTest1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paramètres";

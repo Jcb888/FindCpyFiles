@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.comboBoxWorkingDirectory = new System.Windows.Forms.ComboBox();
             this.buttonPathSource = new System.Windows.Forms.Button();
             this.comboBoxdestination = new System.Windows.Forms.ComboBox();
@@ -163,6 +164,7 @@
             this.Controls.Add(this.buttonPathSource);
             this.Controls.Add(this.comboBoxWorkingDirectory);
             this.Controls.Add(this.menuStrip2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip2;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

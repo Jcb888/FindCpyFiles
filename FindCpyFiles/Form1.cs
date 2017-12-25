@@ -24,6 +24,7 @@ namespace FindCpyFiles
         public static configObject co = new configObject();
         Form2 fp = new Form2();
         List<String> ListFilesToCopy = new List<string>();
+        public String dstDIR = "";
 
         public Form1()
         {
@@ -208,6 +209,8 @@ namespace FindCpyFiles
                     t2 = false;
                 }
             }
+
+            // String sousChaine = Line1.Substring(10,10);
 
 
             if (t1 && t2)
@@ -423,20 +426,21 @@ namespace FindCpyFiles
             else
             {
                 DateTime dt = DateTime.Now;
-                String destinationDIR = "";
+                dstDIR = "";
                 if (checkBoxSousRep.Checked)
                 {
-                    destinationDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second;
-                    Directory.CreateDirectory(destinationDIR);
+                    dstDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second;
+                    Directory.CreateDirectory(dstDIR);
                 }
                 else
                 {
-                    destinationDIR = comboBoxdestination.Text;
+                    dstDIR = comboBoxdestination.Text;
                 }
                
+
                 foreach (var item in ListFilesToCopy)
                 {
-                    string destination = Path.Combine(comboBoxdestination.Text, destinationDIR, Path.GetFileName(item));
+                    string destination = Path.Combine(comboBoxdestination.Text, dstDIR, Path.GetFileName(item));
 
                     try
                     {
@@ -476,7 +480,17 @@ namespace FindCpyFiles
 
                     catch (IOException ioe)
                     {
-                        MessageBox.Show("destFileName existe ou erreur d’ES : " + ioe.StackTrace.ToString());
+                       DialogResult  result = MessageBox.Show("Le fichier existe déja dans la destination " + Environment.NewLine +" vous devrier utiliser l'option créer sous répertoire !", "ATTENTION !",MessageBoxButtons.YesNoCancel);
+                        switch (result)
+                        {
+                            case DialogResult.Yes:
+                                break;
+                            case DialogResult.No:
+                                break;
+                            case DialogResult.Cancel:
+                                return;
+                        }
+
                     }
 
                     catch (NotSupportedException nse)
@@ -499,7 +513,8 @@ namespace FindCpyFiles
 
                 try
             {
-                System.Diagnostics.Process.Start("explorer.exe", comboBoxWorkingDirectory.Text);
+                if (checkBoxSousRep.Checked)
+                    System.Diagnostics.Process.Start("explorer.exe",dstDIR );
             }
             catch (Exception e2)
             {
