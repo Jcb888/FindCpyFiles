@@ -40,13 +40,16 @@
             this.buttonSupDestination = new System.Windows.Forms.Button();
             this.checkBoxSimulation = new System.Windows.Forms.CheckBox();
             this.checkBoxSousRep = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxWorkingDirectory
             // 
             this.comboBoxWorkingDirectory.FormattingEnabled = true;
-            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 42);
+            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(12, 50);
             this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
             this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(304, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
@@ -54,7 +57,7 @@
             // 
             // buttonPathSource
             // 
-            this.buttonPathSource.Location = new System.Drawing.Point(322, 40);
+            this.buttonPathSource.Location = new System.Drawing.Point(322, 48);
             this.buttonPathSource.Name = "buttonPathSource";
             this.buttonPathSource.Size = new System.Drawing.Size(27, 23);
             this.buttonPathSource.TabIndex = 1;
@@ -65,7 +68,7 @@
             // comboBoxdestination
             // 
             this.comboBoxdestination.FormattingEnabled = true;
-            this.comboBoxdestination.Location = new System.Drawing.Point(12, 81);
+            this.comboBoxdestination.Location = new System.Drawing.Point(12, 89);
             this.comboBoxdestination.Name = "comboBoxdestination";
             this.comboBoxdestination.Size = new System.Drawing.Size(304, 21);
             this.comboBoxdestination.TabIndex = 2;
@@ -73,7 +76,7 @@
             // 
             // buttonPathDest
             // 
-            this.buttonPathDest.Location = new System.Drawing.Point(322, 79);
+            this.buttonPathDest.Location = new System.Drawing.Point(322, 87);
             this.buttonPathDest.Name = "buttonPathDest";
             this.buttonPathDest.Size = new System.Drawing.Size(27, 23);
             this.buttonPathDest.TabIndex = 3;
@@ -101,7 +104,7 @@
             // 
             // buttonExecuter
             // 
-            this.buttonExecuter.Location = new System.Drawing.Point(182, 132);
+            this.buttonExecuter.Location = new System.Drawing.Point(129, 132);
             this.buttonExecuter.Name = "buttonExecuter";
             this.buttonExecuter.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuter.TabIndex = 5;
@@ -112,7 +115,7 @@
             // buttonSupWorking
             // 
             this.buttonSupWorking.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
-            this.buttonSupWorking.Location = new System.Drawing.Point(355, 40);
+            this.buttonSupWorking.Location = new System.Drawing.Point(355, 48);
             this.buttonSupWorking.Name = "buttonSupWorking";
             this.buttonSupWorking.Size = new System.Drawing.Size(27, 23);
             this.buttonSupWorking.TabIndex = 6;
@@ -122,7 +125,7 @@
             // buttonSupDestination
             // 
             this.buttonSupDestination.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
-            this.buttonSupDestination.Location = new System.Drawing.Point(355, 79);
+            this.buttonSupDestination.Location = new System.Drawing.Point(355, 87);
             this.buttonSupDestination.Name = "buttonSupDestination";
             this.buttonSupDestination.Size = new System.Drawing.Size(27, 23);
             this.buttonSupDestination.TabIndex = 7;
@@ -151,9 +154,42 @@
             this.checkBoxSousRep.UseVisualStyleBackColor = true;
             this.checkBoxSousRep.CheckedChanged += new System.EventHandler(this.checkBoxSousRep_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Source :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(11, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Destination :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(244, 158);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(153, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "[Enter] pour enregistrer un path";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(400, 178);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBoxSousRep);
             this.Controls.Add(this.checkBoxSimulation);
             this.Controls.Add(this.buttonSupDestination);
@@ -192,6 +228,9 @@
         private System.Windows.Forms.Button buttonSupDestination;
         private System.Windows.Forms.CheckBox checkBoxSimulation;
         private System.Windows.Forms.CheckBox checkBoxSousRep;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

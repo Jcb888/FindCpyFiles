@@ -98,7 +98,7 @@ namespace FindCpyFiles
 
             remplirCombo();
         }
-        
+
         public configObject getCO()
         {
             return co;
@@ -159,7 +159,7 @@ namespace FindCpyFiles
         public void ajouterListContient()
         {
 
-            if (fp.comboBoxContient.Text == "" )
+            if (fp.comboBoxContient.Text == "")
             {
                 MessageBox.Show("la chaine est vide sortie ");
                 return;
@@ -186,20 +186,20 @@ namespace FindCpyFiles
 
             if (co.checkTest1)
             {
-                
+
                 if (Line1.StartsWith(fp.comboBoxCommencePar.Text))
                 {
                     t1 = true;
                 }
                 else
                 {
-                    t1 = false ;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
+                    t1 = false;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
                 }
             }
 
             if (co.checkTest2)
             {
-               
+
                 if (Line1.Contains(fp.comboBoxContient.Text))
                 {
                     t2 = true;
@@ -283,7 +283,7 @@ namespace FindCpyFiles
             bool b = co.ListPathDestination.Any(tr => tr.myValue.Equals(comboBoxdestination.Text, StringComparison.CurrentCultureIgnoreCase));
             if (!b)
             {
-                
+
                 comboItem ci = new comboItem(((co.ListPathDestination.Count) + 1).ToString(), comboBoxdestination.Text);
                 co.ListPathDestination.Add(ci);
                 comboBoxdestination.Items.Add(ci);
@@ -321,7 +321,7 @@ namespace FindCpyFiles
 
         }
 
-       
+
         private void buttonDeleteRep2W_Click(object sender, EventArgs e)
         {
             if (comboBoxWorkingDirectory.SelectedIndex != -1)
@@ -353,7 +353,7 @@ namespace FindCpyFiles
 
         private void comboBoxWorkingDirectory_KeyDown(object sender, KeyEventArgs e)
         {
-          if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 ajouterWorkinglistCombo();
             }
@@ -366,7 +366,13 @@ namespace FindCpyFiles
 
         private void buttonExecuter_Click_1(object sender, EventArgs e)
         {
-            
+            if (!fp.checkBoxTest1.Checked && !fp.checkBoxtest2.Checked)
+            {
+                MessageBox.Show("Rien à chercher, vérifiez les paramètres de recherche");
+                return;
+            }
+
+
             if (!Directory.Exists(comboBoxWorkingDirectory.Text))
             {
                 MessageBox.Show("Ce repertoire source n'existe pas : " + comboBoxWorkingDirectory.Text);
@@ -394,12 +400,12 @@ namespace FindCpyFiles
 
             for (int i = 0; i < tabFiles.Length; i++)
             {
-               
-              traiterFichierEnCours(tabFiles[i]);
-               
+
+                traiterFichierEnCours(tabFiles[i]);
+
             }
 
-            if(ListFilesToCopy.Count < 1)
+            if (ListFilesToCopy.Count < 1)
             {
                 MessageBox.Show("Aucune correspondance trouvée");
                 return;
@@ -411,7 +417,7 @@ namespace FindCpyFiles
 
                 FormAffichage fa = new FormAffichage();
                 fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
-                fa.textBox1.Text = "Correspondances trouvées dans " + Path.GetDirectoryName(tabFiles[0])+ " :";
+                fa.textBox1.Text = "Correspondances trouvées dans " + Path.GetDirectoryName(tabFiles[0]) + " :";
                 fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
 
 
@@ -436,7 +442,7 @@ namespace FindCpyFiles
                 {
                     dstDIR = comboBoxdestination.Text;
                 }
-               
+
 
                 foreach (var item in ListFilesToCopy)
                 {
@@ -447,10 +453,10 @@ namespace FindCpyFiles
                         File.Copy(item, destination, false);
                     }
 
-                    catch(UnauthorizedAccessException ueae)
+                    catch (UnauthorizedAccessException ueae)
                     {
                         MessageBox.Show("Acces non authorise : " + ueae.StackTrace.ToString());
-                    } 
+                    }
 
                     catch (ArgumentNullException ane)
                     {
@@ -480,7 +486,7 @@ namespace FindCpyFiles
 
                     catch (IOException ioe)
                     {
-                       DialogResult  result = MessageBox.Show("Le fichier existe déja dans la destination " + Environment.NewLine +" vous devrier utiliser l'option créer sous répertoire !", "ATTENTION !",MessageBoxButtons.YesNoCancel);
+                        DialogResult result = MessageBox.Show("Le fichier existe déja dans la destination " + Environment.NewLine + " vous devrier utiliser l'option créer sous répertoire !", "ATTENTION !", MessageBoxButtons.YesNoCancel);
                         switch (result)
                         {
                             case DialogResult.Yes:
@@ -502,27 +508,18 @@ namespace FindCpyFiles
                     {
                         MessageBox.Show("Erreur lors de la copie: " + ex.StackTrace.ToString());
                     }
-                   
-                    
-
                 }
-                
             }
 
-
-
-                try
+            try
             {
-                if (checkBoxSousRep.Checked)
-                    System.Diagnostics.Process.Start("explorer.exe",dstDIR );
+                System.Diagnostics.Process.Start("explorer.exe", dstDIR);
             }
             catch (Exception e2)
             {
 
                 MessageBox.Show(e2.StackTrace);
             }
-
-
         }
 
         private void comboBoxdestination_KeyDown(object sender, KeyEventArgs e)
