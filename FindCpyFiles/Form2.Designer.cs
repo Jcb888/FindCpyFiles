@@ -37,6 +37,10 @@
             this.labelEnter = new System.Windows.Forms.Label();
             this.buttonCommencePar = new System.Windows.Forms.Button();
             this.buttonContient = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxTest1
@@ -83,7 +87,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 103);
+            this.label1.Location = new System.Drawing.Point(8, 153);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(320, 20);
             this.label1.TabIndex = 4;
@@ -118,11 +122,45 @@
             this.buttonContient.UseVisualStyleBackColor = true;
             this.buttonContient.Click += new System.EventHandler(this.buttonContient_Click);
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(80, 17);
+            this.radioButton1.TabIndex = 8;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "La 1er ligne";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(6, 42);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(104, 17);
+            this.radioButton2.TabIndex = 9;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Toutes les lignes";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 71);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(144, 68);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Rechercher dans :";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 145);
+            this.ClientSize = new System.Drawing.Size(473, 184);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonContient);
             this.Controls.Add(this.buttonCommencePar);
             this.Controls.Add(this.labelEnter);
@@ -136,6 +174,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paramètres";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +191,8 @@
         private System.Windows.Forms.Label labelEnter;
         private System.Windows.Forms.Button buttonCommencePar;
         private System.Windows.Forms.Button buttonContient;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

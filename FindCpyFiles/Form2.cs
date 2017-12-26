@@ -78,6 +78,15 @@ namespace FindCpyFiles
             }
         }
 
+        public bool OneLineChecked()
+        {
+            return this.radioButton1.Checked;
+        }
+        public void setOneLineChecked()
+        {
+            this.radioButton1.Checked = true;
+        }
+
         private void buttonContient_Click(object sender, EventArgs e)
         {
 
