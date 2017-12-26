@@ -181,42 +181,57 @@ namespace FindCpyFiles
         {
             bool t1 = true;//si on ne test pas alors dans tous les cas c'est true
             bool t2 = true;
+            String[] Lines;
 
-            string Line1 = System.IO.File.ReadLines(fichier).First();
 
-            if (co.checkTest1)
+            if (true)
+            {//pour test future checkBox
+               Lines = new string[1]; 
+               Lines[0] = File.ReadLines(fichier).First();
+            }
+            else
             {
+                Lines = File.ReadAllLines(fichier);
+            }
 
-                if (Line1.StartsWith(fp.comboBoxCommencePar.Text))
+            foreach (String s in Lines)
+            {
+                if (co.checkTest1)
                 {
-                    t1 = true;
+
+                    if (s.StartsWith(fp.comboBoxCommencePar.Text))
+                    {
+                        t1 = true;
+                    }
+                    else
+                    {
+                        t1 = false;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
+                    }
                 }
-                else
+
+                if (co.checkTest2)
                 {
-                    t1 = false;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
+
+                    if (s.Contains(fp.comboBoxContient.Text))
+                    {
+                        t2 = true;
+                    }
+                    else
+                    {
+                        t2 = false;
+                    }
+                }
+
+                // String sousChaine = Line1.Substring(10,10);
+
+
+                if (t1 && t2)
+                {
+                    ListFilesToCopy.Add(fichier);
                 }
             }
 
-            if (co.checkTest2)
-            {
-
-                if (Line1.Contains(fp.comboBoxContient.Text))
-                {
-                    t2 = true;
-                }
-                else
-                {
-                    t2 = false;
-                }
-            }
-
-            // String sousChaine = Line1.Substring(10,10);
-
-
-            if (t1 && t2)
-            {
-                ListFilesToCopy.Add(fichier);
-            }
+           
 
 
         }
@@ -435,7 +450,8 @@ namespace FindCpyFiles
                 dstDIR = "";
                 if (checkBoxSousRep.Checked)
                 {
-                    dstDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour + dt.Minute + dt.Second;
+                    dstDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second;
+                    //dstDIR = comboBoxdestination.Text + "\\" + DateTime.Now.ToString("YYYYHHmmss");
                     Directory.CreateDirectory(dstDIR);
                 }
                 else
