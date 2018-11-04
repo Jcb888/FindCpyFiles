@@ -1,6 +1,6 @@
-﻿namespace FindCpyFiles
+﻿namespace FindCpyFiles.Resources
 {
-    partial class FormAffichage
+    partial class ChargerListeDesCodes
     {
         /// <summary>
         /// Required designer variable.
@@ -28,29 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAffichage));
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxChargerList = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxChargerList
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(284, 567);
-            this.textBox1.TabIndex = 0;
+            this.textBoxChargerList.Location = new System.Drawing.Point(3, 1);
+            this.textBoxChargerList.Multiline = true;
+            this.textBoxChargerList.Name = "textBoxChargerList";
+            this.textBoxChargerList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxChargerList.Size = new System.Drawing.Size(251, 448);
+            this.textBoxChargerList.TabIndex = 0;
             // 
-            // FormAffichage
+            // ChargerListeDesCodes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 567);
-            this.Controls.Add(this.textBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormAffichage";
-            this.Text = "FormAffichage";
+            this.ClientSize = new System.Drawing.Size(255, 450);
+            this.Controls.Add(this.textBoxChargerList);
+            this.Name = "ChargerListeDesCodes";
+            this.Text = "ChargerListeDesCodes";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -58,6 +55,6 @@
 
         #endregion
 
-        public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxChargerList;
     }
 }

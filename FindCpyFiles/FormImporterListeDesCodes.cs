@@ -58,12 +58,18 @@ namespace FindCpyFiles
             tabDesCodes = text.Split('\r');
             text = "";
             fpere.importerNumFactures(tabDesCodes);
+            this.Hide();
         }
 
         private void FormImporterListeDesCodes_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             this.Hide();
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
         }
     }
 }

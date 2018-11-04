@@ -28,7 +28,7 @@ namespace FindCpyFiles
         HashSet<String> hashSetOfFilesToCopy = new HashSet<string>();//hashset n'accepte pas les doublons
         SortedSet<String> sortedSetDesNumFacturesAchercher = new SortedSet<string>();//recherche rapide car trier et pas de doublons
         public String dstDIR = "";
-        public HashSet<String> listDebutFichierAchercher = new HashSet<string>();
+        public HashSet<String> hashsetDebutFichierAchercher = new HashSet<string>();
         
         public Form1()
         {
@@ -37,7 +37,7 @@ namespace FindCpyFiles
             fp.setRef();//methode implementer dans la classe form2 pour lien vers this (le pere)
             fldc.Tag = this;
             fldc.setRef();
-            fa.textBox1.Text = "N° fac" + "\t" + "nomfic" + "\t" + "numLigne";
+            fa.textBox1.Text = "N° fac" + "\t" + "nomfic" + "\t\t" + "numLigne" + Environment.NewLine;
             appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             appDataArterris = Path.Combine(appdata, "Arterris");
             XmlSerializer xs = new XmlSerializer(typeof(configObject));//pour serialiser en XML la config (sauvegarde des paths src et dst)
@@ -50,6 +50,7 @@ namespace FindCpyFiles
             co.strPathDestination = "";
             co.strCommencePar = "";
             co.strContient = "";
+            co.ligneCommencePar = "";
 
             if (!Directory.Exists(appDataArterris))
                 Directory.CreateDirectory(appDataArterris);
@@ -67,7 +68,7 @@ namespace FindCpyFiles
 
                 co.listCommencePar.Add(new comboItem("1", "test"));
                 co.strCommencePar = "test";
-                fp.comboBoxCommencePar.Text = co.strCommencePar;
+                this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
 
                 co.ListContient.Add(new comboItem("1", "test"));
                 co.strContient = "test";
@@ -84,6 +85,8 @@ namespace FindCpyFiles
 
                 co.bSimulation = false;
                 //checkBoxSimulation.Checked = co.bSimulation;
+
+                co.ligneCommencePar = "LD";
 
                 if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//creation
                 {
@@ -105,6 +108,8 @@ namespace FindCpyFiles
             }
 
             remplirCombo();
+            chargerHashSetCommencePar();
+
         }
 
         public configObject getCO()
@@ -133,6 +138,17 @@ namespace FindCpyFiles
 
         }
 
+        private void chargerHashSetCommencePar()
+        {
+            String[] tab = this.textBoxNomFichierCommencePar.Text.Split(',');
+            this.hashsetDebutFichierAchercher.Clear();
+            foreach (String item in tab)
+            {
+                this.hashsetDebutFichierAchercher.Add(item);
+            }
+            
+        }
+
         private void chargerlistView()
         {
             foreach (var item in sortedSetDesNumFacturesAchercher)
@@ -155,11 +171,12 @@ namespace FindCpyFiles
 
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
             comboBoxdestination.Text = co.strPathDestination;
-            fp.comboBoxCommencePar.Text = co.strCommencePar;
+            this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
             fp.comboBoxContient.Text = co.strContient;
 
             fp.checkBoxTest1.Checked = co.checkTest1;
             fp.checkBoxtest2.Checked = co.checkTest2;
+            this.textBoxPremiereLigneCommencePar.Text = co.ligneCommencePar;
             //checkBoxSousRep.Checked = co.bSousRepDest;
             //checkBoxSimulation.Checked = co.bSimulation;
         }
@@ -179,22 +196,22 @@ namespace FindCpyFiles
         public void ajouterListCommencePar()
         {
 
-            if (fp.comboBoxCommencePar.Text == "")
-            {
-                MessageBox.Show("la chaine est vide sortie ");
-                return;
-            }
+            //if (fp.comboBoxCommencePar.Text == "")
+            //{
+            //    MessageBox.Show("la chaine est vide sortie ");
+            //    return;
+            //}
 
-            bool b = co.listCommencePar.Any(tr => tr.myValue.Equals(fp.comboBoxCommencePar.Text, StringComparison.CurrentCultureIgnoreCase));
-            if (!b)
-            {
-                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
-                comboItem ci = new comboItem(((co.listCommencePar.Count) + 1).ToString(), fp.comboBoxCommencePar.Text);
-                co.listCommencePar.Add(ci);
-                co.strCommencePar = fp.comboBoxCommencePar.Text;
-                fp.comboBoxCommencePar.Items.Add(ci);
-                fp.comboBoxCommencePar.SelectedIndex = fp.comboBoxCommencePar.FindStringExact(ci.myValue);
-            }
+            //bool b = co.listCommencePar.Any(tr => tr.myValue.Equals(fp.comboBoxCommencePar.Text, StringComparison.CurrentCultureIgnoreCase));
+            //if (!b)
+            //{
+            //    //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+            //    comboItem ci = new comboItem(((co.listCommencePar.Count) + 1).ToString(), fp.comboBoxCommencePar.Text);
+            //    co.listCommencePar.Add(ci);
+            //    co.strCommencePar = textBoxNomFichierCommencePar.Text;
+            //    fp.comboBoxCommencePar.Items.Add(ci);
+            //    fp.comboBoxCommencePar.SelectedIndex = fp.comboBoxCommencePar.FindStringExact(ci.myValue);
+            //}
         }
 
         public void ajouterListContient()
@@ -220,59 +237,14 @@ namespace FindCpyFiles
 
         private void traiterFichierEnCours(String fichier)
         {
-            bool t1 = true;//si on ne test pas alors dans tous les cas c'est true
-            bool t2 = true;
             String[] Lines;
+            Lines = File.ReadAllLines(fichier);
 
-            if (false) //pour l'instant on va récupérer toutes les lignes
-            {//pour test future checkBox
-               Lines = new string[1]; 
-               Lines[0] = File.ReadLines(fichier).First();
-            }
-            else
-            {
-                Lines = File.ReadAllLines(fichier);
-            }
+            if (!Lines[0].StartsWith(this.textBoxPremiereLigneCommencePar.Text))//si la 1 er ligne ne commence pas par on rend la main
+                return;
 
-            //foreach (String l in Lines)
             for (int l = 0; l < Lines.Length; l++)
             {
-                //if (fp.checkBoxTest1.Checked)
-                //{
-
-                //    if (l.StartsWith(fp.comboBoxCommencePar.Text))
-                //    {
-                //        t1 = true;
-                //    }
-                //    else
-                //    {
-                //        t1 = false;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
-                //    }
-                //}
-
-                //if (co.checkTest2)
-                //{
-
-                //    if (l.Contains(fp.comboBoxContient.Text))
-                //    {
-                //        t2 = true;
-                //    }
-                //    else
-                //    {
-                //        t2 = false;
-                //    }
-                //}
-
-                //// String sousChaine = Line1.Substring(10,10);
-
-
-                //if (t1 && t2)
-                //{
-                //    hashSetOfFilesToCopy.Add(fichier);
-                //}
-
-                //V2===========================================
-
                 String numFaOfThisLine = Lines[l].Substring(88, 6);
                 if (this.sortedSetDesNumFacturesAchercher.Contains(numFaOfThisLine))//le num facture des cette ligne est'il dans la liste des factures recherchés
                 {//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
@@ -282,9 +254,6 @@ namespace FindCpyFiles
                 }
 
             }
-
-           
-
 
         }
 
@@ -370,7 +339,8 @@ namespace FindCpyFiles
             if (co == null)//un min de verif qd mm
                 return;
 
-            co.strCommencePar = fp.comboBoxCommencePar.Text;
+            co.strCommencePar = textBoxNomFichierCommencePar.Text;
+            co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
             co.strContient = fp.comboBoxContient.Text;
 
             try
@@ -438,9 +408,9 @@ namespace FindCpyFiles
 
         private void buttonExecuter_Click_1(object sender, EventArgs e)
         {
-            if (!fp.checkBoxTest1.Checked && !fp.checkBoxtest2.Checked)
+            if (this.sortedSetDesNumFacturesAchercher.Count < 1)
             {
-                MessageBox.Show("Rien à chercher, vérifiez les paramètres de recherche");
+                MessageBox.Show("Rien à chercher, importer liste");
                 return;
             }
 
@@ -451,21 +421,17 @@ namespace FindCpyFiles
                 return;
             }
 
-            if (fp.comboBoxCommencePar.Text == "" && fp.checkBoxTest1.Checked)
+            if (this.textBoxNomFichierCommencePar.Text == "")
             {
-                MessageBox.Show("Le texte commence par est vide sortie");
+                MessageBox.Show("Le texte nom fichier commence par est vide sortie");
                 return;
             }
 
-            if (fp.comboBoxContient.Text == "" && fp.checkBoxtest2.Checked)
+            if (this.textBoxPremiereLigneCommencePar.Text == "")
             {
-                MessageBox.Show("texte à chercher vide sortie");
+                MessageBox.Show("1 er ligne du fichier commence par est vide sortie");
                 return;
             }
-
-            // recup de la liste des fichier .asc du repertoire de la combobox 
-
-            //string[] tabFiles = Directory.GetFileSystemEntries(((KeyValuePair<string, string>)comboBoxWorkingDirectory.SelectedItem).Value, "*.");
 
             string[] tabFiles = Directory.GetFiles(comboBoxWorkingDirectory.Text, "*.");
             hashSetOfFilesToCopy.Clear();
@@ -474,15 +440,15 @@ namespace FindCpyFiles
             {
 
                 // est - ce que le fichier est dans les dates à analyser
-                DateTime dtFile = File.GetCreationTime(file).Date;
+                DateTime dtFile = File.GetLastWriteTime(file).Date;
                 if (!(dtFile.Date > this.dateTimePickerDateDebut.Value.Date && dtFile.Date < this.dateTimePickerDateFin.Value.Date))
                 {
                     //la date n'est pas comprise entre date debut et fin le fichier n'est pas à analyser on passe au suivant
                     continue;
                 }
 
-                String strDebutNomFichier = Path.GetFileName(file).Substring(0, 4);
-                if (!listDebutFichierAchercher.Contains(strDebutNomFichier))
+                String strDebutNomFichier = Path.GetFileName(file).Substring(0, 5);
+                if (!hashsetDebutFichierAchercher.Contains(strDebutNomFichier))
                 {
                     //si le fichier ne commence pas par une chaine faisant partie de la liste on passe au suivant
                     continue;
@@ -500,7 +466,7 @@ namespace FindCpyFiles
             }
 
 
-            if ( true)
+            if (false)
             {
                 //jc20181103 -> deplace dans la methode ajouterelementtrouvesursortie
 
@@ -610,6 +576,8 @@ namespace FindCpyFiles
 
                 MessageBox.Show(e2.StackTrace);
             }
+            fa.Show();
+
         }
 
         private void comboBoxdestination_KeyDown(object sender, KeyEventArgs e)
@@ -652,19 +620,6 @@ namespace FindCpyFiles
             //co.bSimulation = checkBoxSimulation.Checked;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if(checkBoxAnalyseSiDate.Checked)
-            {
-                this.dateTimePickerDateDebut.Enabled = true;
-                this.dateTimePickerDateFin.Enabled = true; 
-            }
-            else
-            {
-                this.dateTimePickerDateDebut.Enabled = false;
-                this.dateTimePickerDateFin.Enabled = false;
-            }
-        }
 
         private void buttonCharger_Click(object sender, EventArgs e)
         {
@@ -693,6 +648,7 @@ namespace FindCpyFiles
         public String strPathDestination;
         public String strCommencePar;
         public String strContient;
+        public String ligneCommencePar;
         public List<comboItem> ListRepertoire2Travail;
         public List<comboItem> ListPathDestination;
         public List<comboItem> listCommencePar;

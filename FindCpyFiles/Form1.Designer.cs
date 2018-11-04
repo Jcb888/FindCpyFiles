@@ -33,8 +33,6 @@
             this.buttonPathSource = new System.Windows.Forms.Button();
             this.comboBoxdestination = new System.Windows.Forms.ComboBox();
             this.buttonPathDest = new System.Windows.Forms.Button();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.parametresRechercheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonExecuter = new System.Windows.Forms.Button();
             this.buttonSupWorking = new System.Windows.Forms.Button();
             this.buttonSupDestination = new System.Windows.Forms.Button();
@@ -43,7 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePickerDateDebut = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBoxAnalyseSiDate = new System.Windows.Forms.CheckBox();
             this.dateTimePickerDateFin = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -51,13 +48,16 @@
             this.trouvé = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Fichier = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonCharger = new System.Windows.Forms.Button();
-            this.menuStrip2.SuspendLayout();
+            this.textBoxNomFichierCommencePar = new System.Windows.Forms.TextBox();
+            this.labelNomFichierCommencePar = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxPremiereLigneCommencePar = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // comboBoxWorkingDirectory
             // 
             this.comboBoxWorkingDirectory.FormattingEnabled = true;
-            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(239, 174);
+            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(239, 257);
             this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
             this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(304, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
@@ -65,7 +65,7 @@
             // 
             // buttonPathSource
             // 
-            this.buttonPathSource.Location = new System.Drawing.Point(549, 172);
+            this.buttonPathSource.Location = new System.Drawing.Point(549, 255);
             this.buttonPathSource.Name = "buttonPathSource";
             this.buttonPathSource.Size = new System.Drawing.Size(27, 23);
             this.buttonPathSource.TabIndex = 1;
@@ -76,7 +76,7 @@
             // comboBoxdestination
             // 
             this.comboBoxdestination.FormattingEnabled = true;
-            this.comboBoxdestination.Location = new System.Drawing.Point(239, 213);
+            this.comboBoxdestination.Location = new System.Drawing.Point(239, 320);
             this.comboBoxdestination.Name = "comboBoxdestination";
             this.comboBoxdestination.Size = new System.Drawing.Size(304, 21);
             this.comboBoxdestination.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             // buttonPathDest
             // 
-            this.buttonPathDest.Location = new System.Drawing.Point(549, 211);
+            this.buttonPathDest.Location = new System.Drawing.Point(549, 318);
             this.buttonPathDest.Name = "buttonPathDest";
             this.buttonPathDest.Size = new System.Drawing.Size(27, 23);
             this.buttonPathDest.TabIndex = 3;
@@ -92,27 +92,9 @@
             this.buttonPathDest.UseVisualStyleBackColor = true;
             this.buttonPathDest.Click += new System.EventHandler(this.buttonPathDest_Click);
             // 
-            // menuStrip2
-            // 
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.parametresRechercheToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(654, 24);
-            this.menuStrip2.TabIndex = 4;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
-            // parametresRechercheToolStripMenuItem
-            // 
-            this.parametresRechercheToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.parametresRechercheToolStripMenuItem.Name = "parametresRechercheToolStripMenuItem";
-            this.parametresRechercheToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
-            this.parametresRechercheToolStripMenuItem.Text = "Paramètres recherche";
-            this.parametresRechercheToolStripMenuItem.Click += new System.EventHandler(this.parametresRechercheToolStripMenuItem_Click);
-            // 
             // buttonExecuter
             // 
-            this.buttonExecuter.Location = new System.Drawing.Point(358, 293);
+            this.buttonExecuter.Location = new System.Drawing.Point(358, 400);
             this.buttonExecuter.Name = "buttonExecuter";
             this.buttonExecuter.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuter.TabIndex = 5;
@@ -122,8 +104,8 @@
             // 
             // buttonSupWorking
             // 
-            this.buttonSupWorking.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
-            this.buttonSupWorking.Location = new System.Drawing.Point(582, 172);
+            this.buttonSupWorking.Image = ((System.Drawing.Image)(resources.GetObject("buttonSupWorking.Image")));
+            this.buttonSupWorking.Location = new System.Drawing.Point(582, 255);
             this.buttonSupWorking.Name = "buttonSupWorking";
             this.buttonSupWorking.Size = new System.Drawing.Size(27, 23);
             this.buttonSupWorking.TabIndex = 6;
@@ -132,8 +114,8 @@
             // 
             // buttonSupDestination
             // 
-            this.buttonSupDestination.Image = global::FindCpyFiles.Properties.Resources.if_delete_370086;
-            this.buttonSupDestination.Location = new System.Drawing.Point(582, 211);
+            this.buttonSupDestination.Image = ((System.Drawing.Image)(resources.GetObject("buttonSupDestination.Image")));
+            this.buttonSupDestination.Location = new System.Drawing.Point(582, 318);
             this.buttonSupDestination.Name = "buttonSupDestination";
             this.buttonSupDestination.Size = new System.Drawing.Size(27, 23);
             this.buttonSupDestination.TabIndex = 7;
@@ -144,7 +126,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(241, 160);
+            this.label1.Location = new System.Drawing.Point(241, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 10;
@@ -154,7 +136,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(238, 200);
+            this.label2.Location = new System.Drawing.Point(238, 307);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 11;
@@ -164,7 +146,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(390, 237);
+            this.label3.Location = new System.Drawing.Point(390, 344);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(153, 13);
             this.label3.TabIndex = 12;
@@ -182,21 +164,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(260, 53);
+            this.label4.Location = new System.Drawing.Point(241, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(329, 13);
             this.label4.TabIndex = 14;
             this.label4.Text = "Analyser les fichiers dont la date de modification est comprise entre le";
-            // 
-            // checkBoxAnalyseSiDate
-            // 
-            this.checkBoxAnalyseSiDate.AutoSize = true;
-            this.checkBoxAnalyseSiDate.Location = new System.Drawing.Point(239, 53);
-            this.checkBoxAnalyseSiDate.Name = "checkBoxAnalyseSiDate";
-            this.checkBoxAnalyseSiDate.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAnalyseSiDate.TabIndex = 15;
-            this.checkBoxAnalyseSiDate.UseVisualStyleBackColor = true;
-            this.checkBoxAnalyseSiDate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // dateTimePickerDateFin
             // 
@@ -252,14 +224,51 @@
             this.buttonCharger.UseVisualStyleBackColor = true;
             this.buttonCharger.Click += new System.EventHandler(this.buttonCharger_Click);
             // 
+            // textBoxNomFichierCommencePar
+            // 
+            this.textBoxNomFichierCommencePar.Location = new System.Drawing.Point(239, 149);
+            this.textBoxNomFichierCommencePar.Name = "textBoxNomFichierCommencePar";
+            this.textBoxNomFichierCommencePar.Size = new System.Drawing.Size(370, 20);
+            this.textBoxNomFichierCommencePar.TabIndex = 20;
+            // 
+            // labelNomFichierCommencePar
+            // 
+            this.labelNomFichierCommencePar.AutoSize = true;
+            this.labelNomFichierCommencePar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNomFichierCommencePar.Location = new System.Drawing.Point(238, 133);
+            this.labelNomFichierCommencePar.Name = "labelNomFichierCommencePar";
+            this.labelNomFichierCommencePar.Size = new System.Drawing.Size(350, 13);
+            this.labelNomFichierCommencePar.TabIndex = 21;
+            this.labelNomFichierCommencePar.Text = "Et dont le nom commence par :  (plusieurs noms possibles séparés par \',\' )";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(236, 187);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(242, 13);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Et dont la premiére ligne du fichier commence par :";
+            // 
+            // textBoxPremiereLigneCommencePar
+            // 
+            this.textBoxPremiereLigneCommencePar.Location = new System.Drawing.Point(237, 203);
+            this.textBoxPremiereLigneCommencePar.Name = "textBoxPremiereLigneCommencePar";
+            this.textBoxPremiereLigneCommencePar.Size = new System.Drawing.Size(370, 20);
+            this.textBoxPremiereLigneCommencePar.TabIndex = 22;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(654, 523);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBoxPremiereLigneCommencePar);
+            this.Controls.Add(this.labelNomFichierCommencePar);
+            this.Controls.Add(this.textBoxNomFichierCommencePar);
             this.Controls.Add(this.buttonCharger);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dateTimePickerDateFin);
-            this.Controls.Add(this.checkBoxAnalyseSiDate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePickerDateDebut);
             this.Controls.Add(this.label3);
@@ -272,15 +281,11 @@
             this.Controls.Add(this.comboBoxdestination);
             this.Controls.Add(this.buttonPathSource);
             this.Controls.Add(this.comboBoxWorkingDirectory);
-            this.Controls.Add(this.menuStrip2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip2;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "findCpyFiles";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,8 +299,6 @@
         private System.Windows.Forms.Button buttonPathSource;
         private System.Windows.Forms.ComboBox comboBoxdestination;
         private System.Windows.Forms.Button buttonPathDest;
-        private System.Windows.Forms.MenuStrip menuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem parametresRechercheToolStripMenuItem;
         private System.Windows.Forms.Button buttonExecuter;
         private System.Windows.Forms.Button buttonSupWorking;
         private System.Windows.Forms.Button buttonSupDestination;
@@ -304,7 +307,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateDebut;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBoxAnalyseSiDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateFin;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView listView1;
@@ -312,6 +314,10 @@
         private System.Windows.Forms.ColumnHeader trouvé;
         private System.Windows.Forms.Button buttonCharger;
         private System.Windows.Forms.ColumnHeader Fichier;
+        private System.Windows.Forms.TextBox textBoxNomFichierCommencePar;
+        private System.Windows.Forms.Label labelNomFichierCommencePar;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxPremiereLigneCommencePar;
     }
 }
 
