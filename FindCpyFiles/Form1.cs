@@ -29,7 +29,7 @@ namespace FindCpyFiles
         SortedSet<String> sortedSetDesNumFacturesAchercher = new SortedSet<string>();//recherche rapide car trier et pas de doublons
         public String dstDIR = "";
         public HashSet<String> listDebutFichierAchercher = new HashSet<string>();
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -123,10 +123,10 @@ namespace FindCpyFiles
                 catch (Exception)
                 {
 
-                    MessageBox.Show("erreur d'insertion de item {0}", item);
+                    MessageBox.Show("erreur d'insertion de item {0}",item);
                     continue;
                 }
-
+                
             }
 
             chargerlistView();
@@ -137,12 +137,12 @@ namespace FindCpyFiles
         {
             foreach (var item in sortedSetDesNumFacturesAchercher)
             {
-                string[] row = { item, "", "" };
+                string[] row = { item, "", ""};
                 var listViewItem = new ListViewItem(row);
                 listView1.Items.Add(listViewItem);
-
+                
             }
-
+            
         }
 
         public void remplirCombo()
@@ -218,7 +218,7 @@ namespace FindCpyFiles
             }
         }
 
-        private void traiterFichiersAvecOptions(string fichier)
+        private void traiterFichierEnCours(String fichier)
         {
             bool t1 = true;//si on ne test pas alors dans tous les cas c'est true
             bool t2 = true;
@@ -226,68 +226,65 @@ namespace FindCpyFiles
 
             if (false) //pour l'instant on va récupérer toutes les lignes
             {//pour test future checkBox
-                Lines = new string[1];
-                Lines[0] = File.ReadLines(fichier).First();
+               Lines = new string[1]; 
+               Lines[0] = File.ReadLines(fichier).First();
             }
             else
             {
                 Lines = File.ReadAllLines(fichier);
             }
 
-            foreach (String l in Lines)
-            {
-                if (fp.checkBoxTest1.Checked)
-                {
-
-                    if (l.StartsWith(fp.comboBoxCommencePar.Text))
-                    {
-                        t1 = true;
-                    }
-                    else
-                    {
-                        t1 = false;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
-                    }
-                }
-
-                if (co.checkTest2)
-                {
-
-                    if (l.Contains(fp.comboBoxContient.Text))
-                    {
-                        t2 = true;
-                    }
-                    else
-                    {
-                        t2 = false;
-                    }
-                }
-
-                // String sousChaine = Line1.Substring(10,10);
-
-
-                if (t1 && t2)
-                {
-                    hashSetOfFilesToCopy.Add(fichier);
-                }
-            }
-        }
-
-        private void traiterToutesLesLignesDuFichierEnCours(String fichier)
-        {
-            
-            String[] Lines = File.ReadAllLines(fichier);
-
+            //foreach (String l in Lines)
             for (int l = 0; l < Lines.Length; l++)
             {
+                //if (fp.checkBoxTest1.Checked)
+                //{
+
+                //    if (l.StartsWith(fp.comboBoxCommencePar.Text))
+                //    {
+                //        t1 = true;
+                //    }
+                //    else
+                //    {
+                //        t1 = false;//si en test et que le resultat est false alors c'est le seul cas ou c'est false
+                //    }
+                //}
+
+                //if (co.checkTest2)
+                //{
+
+                //    if (l.Contains(fp.comboBoxContient.Text))
+                //    {
+                //        t2 = true;
+                //    }
+                //    else
+                //    {
+                //        t2 = false;
+                //    }
+                //}
+
+                //// String sousChaine = Line1.Substring(10,10);
+
+
+                //if (t1 && t2)
+                //{
+                //    hashSetOfFilesToCopy.Add(fichier);
+                //}
+
+                //V2===========================================
+
                 String numFaOfThisLine = Lines[l].Substring(88, 6);
                 if (this.sortedSetDesNumFacturesAchercher.Contains(numFaOfThisLine))//le num facture des cette ligne est'il dans la liste des factures recherchés
-                {
-                    this.sortedSetDesNumFacturesAchercher.Remove(numFaOfThisLine);//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
+                {//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
+                    this.sortedSetDesNumFacturesAchercher.Remove(numFaOfThisLine);
                     this.hashSetOfFilesToCopy.Add(fichier);//on rajoute ce fichier à la liste des fichiers à copier à la fin
-                    ajouterElementTrouveSurSortie(numFaOfThisLine, fichier, l);
+                    ajouterElementTrouveSurSortie(numFaOfThisLine ,fichier, l);
                 }
 
             }
+
+           
+
 
         }
 
@@ -492,9 +489,9 @@ namespace FindCpyFiles
                 }
 
                 //si on arrive ici le fichier est dans les dates et commence par une chaine de la liste
-                traiterToutesLesLignesDuFichierEnCours(file);
+                traiterFichierEnCours(file);
             }
-
+           
 
             if (hashSetOfFilesToCopy.Count < 1)
             {
@@ -503,7 +500,7 @@ namespace FindCpyFiles
             }
 
 
-            if (true)
+            if ( true)
             {
                 //jc20181103 -> deplace dans la methode ajouterelementtrouvesursortie
 
@@ -657,10 +654,10 @@ namespace FindCpyFiles
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxAnalyseSiDate.Checked)
+            if(checkBoxAnalyseSiDate.Checked)
             {
                 this.dateTimePickerDateDebut.Enabled = true;
-                this.dateTimePickerDateFin.Enabled = true;
+                this.dateTimePickerDateFin.Enabled = true; 
             }
             else
             {
@@ -671,7 +668,7 @@ namespace FindCpyFiles
 
         private void buttonCharger_Click(object sender, EventArgs e)
         {
-            if (fldc != null)
+            if(fldc != null)
                 fldc.Show();
         }
     }
