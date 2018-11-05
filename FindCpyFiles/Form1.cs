@@ -29,7 +29,8 @@ namespace FindCpyFiles
         SortedSet<String> sortedSetDesNumFacturesAchercher = new SortedSet<string>();//recherche rapide car trier et pas de doublons
         public String dstDIR = "";
         public HashSet<String> hashsetDebutFichierAchercher = new HashSet<string>();
-        
+        List<itemResultat> ListResultatPourGridView = new List<itemResultat>();
+
         public Form1()
         {
 
@@ -39,6 +40,7 @@ namespace FindCpyFiles
             fldc.Tag = this;
             fldc.setRef();
             fa.textBox1.Text = "N° fac" + "\t" + "nomfic" + "\t\t" + "numLigne" + Environment.NewLine;
+            dataGridView1.DataSource = ListResultatPourGridView;
             appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             appDataArterris = Path.Combine(appdata, "Arterris");
             XmlSerializer xs = new XmlSerializer(typeof(configObject));//pour serialiser en XML la config (sauvegarde des paths src et dst)
@@ -129,10 +131,10 @@ namespace FindCpyFiles
                 catch (Exception)
                 {
 
-                    MessageBox.Show("erreur d'insertion de item {0}",item);
+                    MessageBox.Show("erreur d'insertion de item {0}", item);
                     continue;
                 }
-                
+
             }
 
             chargerlistView();
@@ -147,19 +149,19 @@ namespace FindCpyFiles
             {
                 this.hashsetDebutFichierAchercher.Add(item);
             }
-            
+
         }
 
         private void chargerlistView()
         {
             foreach (var item in sortedSetDesNumFacturesAchercher)
             {
-                string[] row = { item, "", ""};
+                string[] row = { item, "", "" };
                 var listViewItem = new ListViewItem(row);
                 listView1.Items.Add(listViewItem);
-                
+
             }
-            
+
         }
 
         public void remplirCombo()
@@ -236,7 +238,7 @@ namespace FindCpyFiles
             }
         }
 
-        private void traiterFichierEnCours(String fichier)
+        private void traiterFichierEnCours(String fichier, DateTime dtModifFile)
         {
             String[] Lines;
             Lines = File.ReadAllLines(fichier);
@@ -251,11 +253,18 @@ namespace FindCpyFiles
                 {//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
                     this.sortedSetDesNumFacturesAchercher.Remove(numFaOfThisLine);
                     this.hashSetOfFilesToCopy.Add(fichier);//on rajoute ce fichier à la liste des fichiers à copier à la fin
-                    ajouterElementTrouveSurSortie(numFaOfThisLine ,fichier, l);
+                    ajouterElementTrouveSurSortie(numFaOfThisLine, fichier, l);
+                    ajouterElementTrouvedansGridView(numFaOfThisLine, true, fichier, l, dtModifFile);
                 }
 
             }
 
+        }
+
+        private void ajouterElementTrouvedansGridView(string numFaOfThisLine, bool v, string fichier, int l, DateTime dtModifFile)
+        {
+            itemResultat ir = new itemResultat(numFaOfThisLine, v, Path.GetFileName(fichier), l, dtModifFile);
+            ListResultatPourGridView.Add(ir);
         }
 
         private void ajouterElementTrouveSurSortie(string numFaOfThisLine, String fichier, int l)
@@ -409,6 +418,8 @@ namespace FindCpyFiles
 
         private void buttonExecuter_Click_1(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             if (this.sortedSetDesNumFacturesAchercher.Count < 1)
             {
                 MessageBox.Show("Rien à chercher, importer liste");
@@ -456,9 +467,9 @@ namespace FindCpyFiles
                 }
 
                 //si on arrive ici le fichier est dans les dates et commence par une chaine de la liste
-                traiterFichierEnCours(file);
+                traiterFichierEnCours(file, dtFile);
             }
-           
+
 
             if (hashSetOfFilesToCopy.Count < 1)
             {
@@ -578,6 +589,9 @@ namespace FindCpyFiles
                 MessageBox.Show(e2.StackTrace);
             }
             fa.Show();
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = ListResultatPourGridView;
+            Cursor.Current = Cursors.Default;
 
         }
 
@@ -624,8 +638,53 @@ namespace FindCpyFiles
 
         private void buttonCharger_Click(object sender, EventArgs e)
         {
-            if(fldc != null)
+            if (fldc != null)
                 fldc.Show();
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(
+    object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewColumn newColumn = dataGridView1.Columns[e.ColumnIndex];
+            DataGridViewColumn oldColumn = dataGridView1.SortedColumn;
+            ListSortDirection direction;
+
+            // If oldColumn is null, then the DataGridView is not sorted.
+            if (oldColumn != null)
+            {
+                // Sort the same column again, reversing the SortOrder.
+                if (oldColumn == newColumn &&
+                    dataGridView1.SortOrder == SortOrder.Ascending)
+                {
+                    direction = ListSortDirection.Descending;
+                }
+                else
+                {
+                    // Sort a new column and remove the old SortGlyph.
+                    direction = ListSortDirection.Ascending;
+                    oldColumn.HeaderCell.SortGlyphDirection = SortOrder.None;
+                }
+            }
+            else
+            {
+                direction = ListSortDirection.Ascending;
+            }
+
+            // Sort the selected column.
+            dataGridView1.Sort(newColumn, direction);
+            newColumn.HeaderCell.SortGlyphDirection =
+                direction == ListSortDirection.Ascending ?
+                SortOrder.Ascending : SortOrder.Descending;
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender,
+            DataGridViewBindingCompleteEventArgs e)
+        {
+            // Put each of the columns into programmatic sort mode.
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
         }
     }
 

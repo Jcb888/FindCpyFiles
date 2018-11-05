@@ -52,6 +52,8 @@
             this.labelNomFichierCommencePar = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxPremiereLigneCommencePar = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxWorkingDirectory
@@ -258,9 +260,18 @@
             this.textBoxPremiereLigneCommencePar.Size = new System.Drawing.Size(370, 20);
             this.textBoxPremiereLigneCommencePar.TabIndex = 22;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(670, 43);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(344, 404);
+            this.dataGridView1.TabIndex = 24;
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(654, 523);
+            this.ClientSize = new System.Drawing.Size(1059, 523);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxPremiereLigneCommencePar);
             this.Controls.Add(this.labelNomFichierCommencePar);
@@ -286,6 +297,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "findCpyFiles";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,6 +330,7 @@
         private System.Windows.Forms.Label labelNomFichierCommencePar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxPremiereLigneCommencePar;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

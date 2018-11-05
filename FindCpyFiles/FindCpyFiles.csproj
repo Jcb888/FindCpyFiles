@@ -108,6 +108,7 @@
     <Compile Include="FormImporterListeDesCodes.Designer.cs">
       <DependentUpon>FormImporterListeDesCodes.cs</DependentUpon>
     </Compile>
+    <Compile Include="itemResultat.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
