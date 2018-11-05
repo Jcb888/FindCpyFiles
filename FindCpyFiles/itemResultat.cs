@@ -18,7 +18,7 @@ namespace FindCpyFiles
             numFA = n;
             trouve = t;
             nomfichier = nf;
-            ligne = ligne;
+            ligne = l;
             dateModif = dm;
         }
 

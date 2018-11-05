@@ -29,7 +29,8 @@ namespace FindCpyFiles
         SortedSet<String> sortedSetDesNumFacturesAchercher = new SortedSet<string>();//recherche rapide car trier et pas de doublons
         public String dstDIR = "";
         public HashSet<String> hashsetDebutFichierAchercher = new HashSet<string>();
-        List<itemResultat> ListResultatPourGridView = new List<itemResultat>();
+        //List<itemResultat> ListResultatPourGridView = new List<itemResultat>();
+        SortableBindingList<itemResultat> ListResultatPourGridView = new SortableBindingList<itemResultat>();
 
         public Form1()
         {
@@ -642,9 +643,10 @@ namespace FindCpyFiles
                 fldc.Show();
         }
 
-        private void dataGridView1_ColumnHeaderMouseClick(
-    object sender, DataGridViewCellMouseEventArgs e)
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            MessageBox.Show("click colonne");
+
             DataGridViewColumn newColumn = dataGridView1.Columns[e.ColumnIndex];
             DataGridViewColumn oldColumn = dataGridView1.SortedColumn;
             ListSortDirection direction;
@@ -675,16 +677,6 @@ namespace FindCpyFiles
             newColumn.HeaderCell.SortGlyphDirection =
                 direction == ListSortDirection.Ascending ?
                 SortOrder.Ascending : SortOrder.Descending;
-        }
-
-        private void dataGridView1_DataBindingComplete(object sender,
-            DataGridViewBindingCompleteEventArgs e)
-        {
-            // Put each of the columns into programmatic sort mode.
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.Programmatic;
-            }
         }
     }
 
