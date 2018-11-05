@@ -32,6 +32,7 @@ namespace FindCpyFiles
         
         public Form1()
         {
+
             InitializeComponent();
             fp.Tag = this;
             fp.setRef();//methode implementer dans la classe form2 pour lien vers this (le pere)

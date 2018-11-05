@@ -17,7 +17,6 @@ namespace FindCpyFiles
         public Form2()
         {
             InitializeComponent();
-            
         }
 
         private void checkBoxTest1_CheckedChanged(object sender, EventArgs e)

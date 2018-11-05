@@ -18,7 +18,6 @@ namespace FindCpyFiles
         public FormImporterListeDesCodes()
         {
             InitializeComponent();
-            
         }
 
         //pour créer un lien vers le formulaire pére
