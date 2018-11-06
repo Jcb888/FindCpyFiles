@@ -55,7 +55,7 @@
             this.checkBoxTest1.TabIndex = 0;
             this.checkBoxTest1.Text = "Si la 1er ligne commence par :";
             this.checkBoxTest1.UseVisualStyleBackColor = true;
-            this.checkBoxTest1.CheckedChanged += new System.EventHandler(this.checkBoxTest1_CheckedChanged);
+            //this.checkBoxTest1.CheckedChanged += new System.EventHandler(this.checkBoxTest1_CheckedChanged);
             // 
             // comboBoxCommencePar
             // 
@@ -75,7 +75,7 @@
             this.checkBoxtest2.TabIndex = 2;
             this.checkBoxtest2.Text = "et contient :";
             this.checkBoxtest2.UseVisualStyleBackColor = true;
-            this.checkBoxtest2.CheckedChanged += new System.EventHandler(this.checkBoxtest2_CheckedChanged);
+            //this.checkBoxtest2.CheckedChanged += new System.EventHandler(this.checkBoxtest2_CheckedChanged);
             // 
             // comboBoxContient
             // 
@@ -84,7 +84,7 @@
             this.comboBoxContient.Name = "comboBoxContient";
             this.comboBoxContient.Size = new System.Drawing.Size(241, 21);
             this.comboBoxContient.TabIndex = 3;
-            this.comboBoxContient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxContient_KeyDown);
+            //this.comboBoxContient.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxContient_KeyDown);
             // 
             // label1
             // 
@@ -123,7 +123,7 @@
             this.buttonContient.Size = new System.Drawing.Size(25, 23);
             this.buttonContient.TabIndex = 7;
             this.buttonContient.UseVisualStyleBackColor = true;
-            this.buttonContient.Click += new System.EventHandler(this.buttonContient_Click);
+            //this.buttonContient.Click += new System.EventHandler(this.buttonContient_Click);
             // 
             // radioButton1
             // 
@@ -205,7 +205,7 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paramètres";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

@@ -22,7 +22,7 @@ namespace FindCpyFiles
         string appDataArterris = "";//c'est dans ce repertoire qu'on a les droits et qu'il convient d'écrire
         string appdata = "";//son ss rep.
         public static configObject co = new configObject();
-        Form2 fp = new Form2();
+        //Form2 fp = new Form2();
         FormImporterListeDesCodes fldc = new FormImporterListeDesCodes();
         FormAffichage fa = new FormAffichage();
         HashSet<String> hashSetOfFilesToCopy = new HashSet<string>();//hashset n'accepte pas les doublons
@@ -36,8 +36,8 @@ namespace FindCpyFiles
         {
 
             InitializeComponent();
-            fp.Tag = this;
-            fp.setRef();//methode implementer dans la classe form2 pour lien vers this (le pere)
+            //fp.Tag = this;
+            //fp.setRef();//methode implementer dans la classe form2 pour lien vers this (le pere)
             fldc.Tag = this;
             fldc.setRef();
             fa.textBox1.Text = "N° fac" + "\t" + "nomfic" + "\t\t" + "numLigne" + Environment.NewLine;
@@ -48,8 +48,8 @@ namespace FindCpyFiles
             co.ListRepertoire2Travail = new List<comboItem>();
             co.ListPathDestination = new List<comboItem>();
             co.listCommencePar = new List<comboItem>();
-            co.ListContient = new List<comboItem>();
-            co.bSousRepDest = true;
+            //co.ListContient = new List<comboItem>();
+            //co.bSousRepDest = true;
             co.strRepertoire2Travail = "";
             co.strPathDestination = "";
             co.strCommencePar = "";
@@ -74,23 +74,23 @@ namespace FindCpyFiles
                 co.strCommencePar = "test";
                 this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
 
-                co.ListContient.Add(new comboItem("1", "test"));
-                co.strContient = "test";
-                fp.comboBoxContient.Text = co.strContient;
+                //co.ListContient.Add(new comboItem("1", "test"));
+                //co.strContient = "test";
+                //fp.comboBoxContient.Text = co.strContient;
 
-                co.checkTest1 = true;
-                fp.checkBoxTest1.Checked = co.checkTest1;
+                //co.checkTest1 = true;
+                //fp.checkBoxTest1.Checked = co.checkTest1;
 
-                co.checkTest2 = true;
-                fp.checkBoxtest2.Checked = co.checkTest2;
+                //co.checkTest2 = true;
+                //fp.checkBoxtest2.Checked = co.checkTest2;
 
-                co.bSousRepDest = true;
+                //co.bSousRepDest = true;
                 //checkBoxSousRep.Checked = true;
 
-                co.bSimulation = false;
+                //co.bSimulation = false;
                 //checkBoxSimulation.Checked = co.bSimulation;
 
-                co.ligneCommencePar = "LD";
+                co.ligneCommencePar = "LS";
 
                 if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//creation
                 {
@@ -101,7 +101,6 @@ namespace FindCpyFiles
                     }
 
                 }
-
 
             }
 
@@ -170,32 +169,32 @@ namespace FindCpyFiles
 
             co.ListRepertoire2Travail.ForEach(i => comboBoxWorkingDirectory.Items.Add(i));
             co.ListPathDestination.ForEach(i => comboBoxdestination.Items.Add(i));
-            co.listCommencePar.ForEach(i => fp.comboBoxCommencePar.Items.Add(i));
-            co.ListContient.ForEach(i => fp.comboBoxContient.Items.Add(i));
+            //co.listCommencePar.ForEach(i => fp.comboBoxCommencePar.Items.Add(i));
+            //co.ListContient.ForEach(i => fp.comboBoxContient.Items.Add(i));
 
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
             comboBoxdestination.Text = co.strPathDestination;
-            this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
-            fp.comboBoxContient.Text = co.strContient;
+            textBoxNomFichierCommencePar.Text = co.strCommencePar;
+            //fp.comboBoxContient.Text = co.strContient;
 
-            fp.checkBoxTest1.Checked = co.checkTest1;
-            fp.checkBoxtest2.Checked = co.checkTest2;
-            this.textBoxPremiereLigneCommencePar.Text = co.ligneCommencePar;
+            //fp.checkBoxTest1.Checked = co.checkTest1;
+            //fp.checkBoxtest2.Checked = co.checkTest2;
+            textBoxPremiereLigneCommencePar.Text = co.ligneCommencePar;
             //checkBoxSousRep.Checked = co.bSousRepDest;
             //checkBoxSimulation.Checked = co.bSimulation;
         }
 
-        public void setCOcheckTest1(bool b)
-        {
-            co.checkTest1 = b;
+        //public void setCOcheckTest1(bool b)
+        //{
+        //    co.checkTest1 = b;
 
-        }
+        //}
 
-        public void setCOcheckTest2(bool b)
-        {
-            co.checkTest2 = b;
+        //public void setCOcheckTest2(bool b)
+        //{
+        //    co.checkTest2 = b;
 
-        }
+        //}
 
         public void ajouterListCommencePar()
         {
@@ -218,34 +217,36 @@ namespace FindCpyFiles
             //}
         }
 
-        public void ajouterListContient()
-        {
+        //public void ajouterListContient()
+        //{
 
-            if (fp.comboBoxContient.Text == "")
-            {
-                MessageBox.Show("la chaine est vide sortie ");
-                return;
-            }
+        //    if (fp.comboBoxContient.Text == "")
+        //    {
+        //        MessageBox.Show("la chaine est vide sortie ");
+        //        return;
+        //    }
 
-            bool b = co.ListContient.Any(tr => tr.myValue.Equals(fp.comboBoxContient.Text, StringComparison.CurrentCultureIgnoreCase));
-            if (!b)
-            {
-                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
-                comboItem ci = new comboItem(((co.ListContient.Count) + 1).ToString(), fp.comboBoxContient.Text);
-                co.ListContient.Add(ci);
-                co.strContient = fp.comboBoxContient.Text;
-                fp.comboBoxContient.Items.Add(ci);
-                fp.comboBoxContient.SelectedIndex = fp.comboBoxContient.FindStringExact(ci.myValue);
-            }
-        }
+        //    bool b = co.ListContient.Any(tr => tr.myValue.Equals(fp.comboBoxContient.Text, StringComparison.CurrentCultureIgnoreCase));
+        //    if (!b)
+        //    {
+        //        //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+        //        comboItem ci = new comboItem(((co.ListContient.Count) + 1).ToString(), fp.comboBoxContient.Text);
+        //        co.ListContient.Add(ci);
+        //        co.strContient = fp.comboBoxContient.Text;
+        //        fp.comboBoxContient.Items.Add(ci);
+        //        fp.comboBoxContient.SelectedIndex = fp.comboBoxContient.FindStringExact(ci.myValue);
+        //    }
+        //}
 
         private void traiterFichierEnCours(String fichier, DateTime dtModifFile)
         {
             String[] Lines;
             Lines = File.ReadAllLines(fichier);
+            //int nbtrouve = 0;
 
             if (!Lines[0].StartsWith(this.textBoxPremiereLigneCommencePar.Text))//si la 1 er ligne ne commence pas par on rend la main
                 return;
+
 
             for (int l = 0; l < Lines.Length; l++)
             {
@@ -254,12 +255,14 @@ namespace FindCpyFiles
                 {//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
                     this.sortedSetDesNumFacturesAchercher.Remove(numFaOfThisLine);
                     this.hashSetOfFilesToCopy.Add(fichier);//on rajoute ce fichier à la liste des fichiers à copier à la fin
-                    ajouterElementTrouveSurSortie(numFaOfThisLine, fichier, l);
+                    //ajouterElementTrouveSurSortie(numFaOfThisLine, fichier, l);
                     ajouterElementTrouvedansGridView(numFaOfThisLine, true, fichier, l, dtModifFile);
+                    //nbtrouve++;
                 }
 
             }
 
+            //Console.WriteLine("nblignes fichier :" + Lines.Length + "nb lignes qui matches : " + nbtrouve.ToString());
         }
 
         private void ajouterElementTrouvedansGridView(string numFaOfThisLine, bool v, string fichier, int l, DateTime dtModifFile)
@@ -352,7 +355,7 @@ namespace FindCpyFiles
 
             co.strCommencePar = textBoxNomFichierCommencePar.Text;
             co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
-            co.strContient = fp.comboBoxContient.Text;
+            //co.strContient = fp.comboBoxContient.Text;
 
             try
             {
@@ -399,10 +402,10 @@ namespace FindCpyFiles
             ajouterPathDestListCombo();
         }
 
-        private void parametresRechercheToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fp.Show();
-        }
+        //private void parametresRechercheToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    fp.Show();
+        //}
 
         private void comboBoxWorkingDirectory_KeyDown(object sender, KeyEventArgs e)
         {
@@ -479,106 +482,77 @@ namespace FindCpyFiles
             }
 
 
-            if (false)
+            DateTime dt = DateTime.Now;
+            dstDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second;
+            //dstDIR = comboBoxdestination.Text + "\\" + DateTime.Now.ToString("YYYYHHmmss");
+            Directory.CreateDirectory(dstDIR);
+
+            foreach (var item in hashSetOfFilesToCopy)
             {
-                //jc20181103 -> deplace dans la methode ajouterelementtrouvesursortie
+                string destination = Path.Combine(comboBoxdestination.Text, dstDIR, Path.GetFileName(item));
 
-                //FormAffichage fa = new FormAffichage();
-                //fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Bold);
-                //fa.textBox1.Text = "Correspondances trouvées dans " + Path.GetDirectoryName(tabFiles[0]) + " :";
-                //fa.textBox1.Font = new Font(fa.textBox1.Font, FontStyle.Regular);
-
-
-                //foreach (var item in hashSetOfFilesToCopy)
-                //{
-                //    fa.textBox1.AppendText(Environment.NewLine);
-                //    fa.textBox1.AppendText(item);
-                //}
-                //fa.Show();
-                //return;
-            }
-            else
-            {
-                DateTime dt = DateTime.Now;
-                dstDIR = "";
-                if (true)
+                try
                 {
-                    dstDIR = comboBoxdestination.Text + "\\" + dt.Year + "-" + dt.Month + "-" + dt.Day + "_" + dt.Hour.ToString() + dt.Minute.ToString() + dt.Second;
-                    //dstDIR = comboBoxdestination.Text + "\\" + DateTime.Now.ToString("YYYYHHmmss");
-                    Directory.CreateDirectory(dstDIR);
-                }
-                else
-                {
-                    dstDIR = comboBoxdestination.Text;
+                    File.Copy(item, destination, false);
                 }
 
-
-                foreach (var item in hashSetOfFilesToCopy)
+                catch (UnauthorizedAccessException ueae)
                 {
-                    string destination = Path.Combine(comboBoxdestination.Text, dstDIR, Path.GetFileName(item));
+                    MessageBox.Show("Acces non authorise : " + ueae.StackTrace.ToString());
+                }
 
-                    try
+                catch (ArgumentNullException ane)
+                {
+                    MessageBox.Show("un des chemins est vide : " + ane.StackTrace.ToString());
+                }
+
+                catch (ArgumentException ae)
+                {
+                    MessageBox.Show("erreur dans les chemins passés en paramètre : " + ae.StackTrace.ToString());
+                }
+
+                catch (PathTooLongException atle)
+                {
+                    MessageBox.Show("un des chemins est trop long : " + atle.StackTrace.ToString());
+
+                }
+
+                catch (DirectoryNotFoundException dnfe)
+                {
+                    MessageBox.Show("Un  des chemins n'existe pas : " + dnfe.StackTrace.ToString());
+                }
+
+                catch (FileNotFoundException fnfe)
+                {
+                    MessageBox.Show("Le fichier source non trouve : " + fnfe.StackTrace.ToString());
+                }
+
+                catch (IOException ioe)
+                {
+                    DialogResult result = MessageBox.Show("Le fichier existe déja dans la destination " + Environment.NewLine + " vous devrier utiliser l'option créer sous répertoire !", "ATTENTION !", MessageBoxButtons.YesNoCancel);
+                    switch (result)
                     {
-                        File.Copy(item, destination, false);
+                        case DialogResult.Yes:
+                            break;
+                        case DialogResult.No:
+                            break;
+                        case DialogResult.Cancel:
+                            return;
                     }
 
-                    catch (UnauthorizedAccessException ueae)
-                    {
-                        MessageBox.Show("Acces non authorise : " + ueae.StackTrace.ToString());
-                    }
+                }
 
-                    catch (ArgumentNullException ane)
-                    {
-                        MessageBox.Show("un des chemins est vide : " + ane.StackTrace.ToString());
-                    }
+                catch (NotSupportedException nse)
+                {
+                    MessageBox.Show("sourceFileName ou destFileName a un format non valide. : " + nse.StackTrace.ToString());
+                }
 
-                    catch (ArgumentException ae)
-                    {
-                        MessageBox.Show("erreur dans les chemins passés en paramètre : " + ae.StackTrace.ToString());
-                    }
-
-                    catch (PathTooLongException atle)
-                    {
-                        MessageBox.Show("un des chemins est trop long : " + atle.StackTrace.ToString());
-
-                    }
-
-                    catch (DirectoryNotFoundException dnfe)
-                    {
-                        MessageBox.Show("Un  des chemins n'existe pas : " + dnfe.StackTrace.ToString());
-                    }
-
-                    catch (FileNotFoundException fnfe)
-                    {
-                        MessageBox.Show("Le fichier source non trouve : " + fnfe.StackTrace.ToString());
-                    }
-
-                    catch (IOException ioe)
-                    {
-                        DialogResult result = MessageBox.Show("Le fichier existe déja dans la destination " + Environment.NewLine + " vous devrier utiliser l'option créer sous répertoire !", "ATTENTION !", MessageBoxButtons.YesNoCancel);
-                        switch (result)
-                        {
-                            case DialogResult.Yes:
-                                break;
-                            case DialogResult.No:
-                                break;
-                            case DialogResult.Cancel:
-                                return;
-                        }
-
-                    }
-
-                    catch (NotSupportedException nse)
-                    {
-                        MessageBox.Show("sourceFileName ou destFileName a un format non valide. : " + nse.StackTrace.ToString());
-                    }
-
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Erreur lors de la copie: " + ex.StackTrace.ToString());
-                    }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erreur lors de la copie: " + ex.StackTrace.ToString());
                 }
             }
+
 
             try
             {
@@ -589,10 +563,22 @@ namespace FindCpyFiles
 
                 MessageBox.Show(e2.StackTrace);
             }
-            fa.Show();
+            //fa.Show();
+            ajouterNonTrouve();
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = ListResultatPourGridView;
             Cursor.Current = Cursors.Default;
+
+        }
+
+        private void ajouterNonTrouve()
+        {
+            foreach (string item in sortedSetDesNumFacturesAchercher)
+            {
+                itemResultat ir = new itemResultat(item, false, "", 0, new DateTime(1900, 01, 01));
+                ListResultatPourGridView.Add(ir);
+
+            }
 
         }
 
@@ -643,45 +629,53 @@ namespace FindCpyFiles
                 fldc.Show();
         }
 
-        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void textBoxNomFichierCommencePar_Leave(object sender, EventArgs e)
         {
-            MessageBox.Show("click colonne");
-
-            DataGridViewColumn newColumn = dataGridView1.Columns[e.ColumnIndex];
-            DataGridViewColumn oldColumn = dataGridView1.SortedColumn;
-            ListSortDirection direction;
-
-            // If oldColumn is null, then the DataGridView is not sorted.
-            if (oldColumn != null)
-            {
-                // Sort the same column again, reversing the SortOrder.
-                if (oldColumn == newColumn &&
-                    dataGridView1.SortOrder == SortOrder.Ascending)
-                {
-                    direction = ListSortDirection.Descending;
-                }
-                else
-                {
-                    // Sort a new column and remove the old SortGlyph.
-                    direction = ListSortDirection.Ascending;
-                    oldColumn.HeaderCell.SortGlyphDirection = SortOrder.None;
-                }
-            }
-            else
-            {
-                direction = ListSortDirection.Ascending;
-            }
-
-            // Sort the selected column.
-            dataGridView1.Sort(newColumn, direction);
-            newColumn.HeaderCell.SortGlyphDirection =
-                direction == ListSortDirection.Ascending ?
-                SortOrder.Ascending : SortOrder.Descending;
+            co.strCommencePar = textBoxNomFichierCommencePar.Text;
         }
+
+        private void textBoxPremiereLigneCommencePar_Leave(object sender, EventArgs e)
+        {
+            co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
+        }
+
+        //private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    //MessageBox.Show("click colonne");
+
+        //    //DataGridViewColumn newColumn = dataGridView1.Columns[e.ColumnIndex];
+        //    //DataGridViewColumn oldColumn = dataGridView1.SortedColumn;
+        //    //ListSortDirection direction;
+
+        //    //// If oldColumn is null, then the DataGridView is not sorted.
+        //    //if (oldColumn != null)
+        //    //{
+        //    //    // Sort the same column again, reversing the SortOrder.
+        //    //    if (oldColumn == newColumn &&
+        //    //        dataGridView1.SortOrder == SortOrder.Ascending)
+        //    //    {
+        //    //        direction = ListSortDirection.Descending;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        // Sort a new column and remove the old SortGlyph.
+        //    //        direction = ListSortDirection.Ascending;
+        //    //        oldColumn.HeaderCell.SortGlyphDirection = SortOrder.None;
+        //    //    }
+        //    //}
+        //    //else
+        //    //{
+        //    //    direction = ListSortDirection.Ascending;
+        //    //}
+
+        //    //// Sort the selected column.
+        //    //dataGridView1.Sort(newColumn, direction);
+        //    //newColumn.HeaderCell.SortGlyphDirection =
+        //    //    direction == ListSortDirection.Ascending ?
+        //    //    SortOrder.Ascending : SortOrder.Descending;
+        //}
+
     }
-
-
-
 
     public class configObject
     {
@@ -692,10 +686,10 @@ namespace FindCpyFiles
         }
 
 
-        public bool checkTest1;
-        public bool checkTest2;
-        public bool bSousRepDest;
-        public bool bSimulation;
+        //public bool checkTest1;
+        //public bool checkTest2;
+        //public bool bSousRepDest;
+        //public bool bSimulation;
         public String strRepertoire2Travail;
         public String strPathDestination;
         public String strCommencePar;
@@ -704,7 +698,7 @@ namespace FindCpyFiles
         public List<comboItem> ListRepertoire2Travail;
         public List<comboItem> ListPathDestination;
         public List<comboItem> listCommencePar;
-        public List<comboItem> ListContient;
+        //public List<comboItem> ListContient;
 
     }
 

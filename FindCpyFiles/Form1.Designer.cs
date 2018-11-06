@@ -44,9 +44,7 @@
             this.dateTimePickerDateFin = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.Num = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.trouvé = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Fichier = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NumFA = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonCharger = new System.Windows.Forms.Button();
             this.textBoxNomFichierCommencePar = new System.Windows.Forms.TextBox();
             this.labelNomFichierCommencePar = new System.Windows.Forms.Label();
@@ -59,7 +57,7 @@
             // comboBoxWorkingDirectory
             // 
             this.comboBoxWorkingDirectory.FormattingEnabled = true;
-            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(239, 257);
+            this.comboBoxWorkingDirectory.Location = new System.Drawing.Point(134, 257);
             this.comboBoxWorkingDirectory.Name = "comboBoxWorkingDirectory";
             this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(304, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
@@ -67,7 +65,7 @@
             // 
             // buttonPathSource
             // 
-            this.buttonPathSource.Location = new System.Drawing.Point(549, 255);
+            this.buttonPathSource.Location = new System.Drawing.Point(444, 255);
             this.buttonPathSource.Name = "buttonPathSource";
             this.buttonPathSource.Size = new System.Drawing.Size(27, 23);
             this.buttonPathSource.TabIndex = 1;
@@ -78,7 +76,7 @@
             // comboBoxdestination
             // 
             this.comboBoxdestination.FormattingEnabled = true;
-            this.comboBoxdestination.Location = new System.Drawing.Point(239, 320);
+            this.comboBoxdestination.Location = new System.Drawing.Point(134, 320);
             this.comboBoxdestination.Name = "comboBoxdestination";
             this.comboBoxdestination.Size = new System.Drawing.Size(304, 21);
             this.comboBoxdestination.TabIndex = 2;
@@ -86,7 +84,7 @@
             // 
             // buttonPathDest
             // 
-            this.buttonPathDest.Location = new System.Drawing.Point(549, 318);
+            this.buttonPathDest.Location = new System.Drawing.Point(444, 318);
             this.buttonPathDest.Name = "buttonPathDest";
             this.buttonPathDest.Size = new System.Drawing.Size(27, 23);
             this.buttonPathDest.TabIndex = 3;
@@ -96,7 +94,7 @@
             // 
             // buttonExecuter
             // 
-            this.buttonExecuter.Location = new System.Drawing.Point(358, 400);
+            this.buttonExecuter.Location = new System.Drawing.Point(253, 400);
             this.buttonExecuter.Name = "buttonExecuter";
             this.buttonExecuter.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuter.TabIndex = 5;
@@ -107,7 +105,7 @@
             // buttonSupWorking
             // 
             this.buttonSupWorking.Image = ((System.Drawing.Image)(resources.GetObject("buttonSupWorking.Image")));
-            this.buttonSupWorking.Location = new System.Drawing.Point(582, 255);
+            this.buttonSupWorking.Location = new System.Drawing.Point(477, 255);
             this.buttonSupWorking.Name = "buttonSupWorking";
             this.buttonSupWorking.Size = new System.Drawing.Size(27, 23);
             this.buttonSupWorking.TabIndex = 6;
@@ -117,7 +115,7 @@
             // buttonSupDestination
             // 
             this.buttonSupDestination.Image = ((System.Drawing.Image)(resources.GetObject("buttonSupDestination.Image")));
-            this.buttonSupDestination.Location = new System.Drawing.Point(582, 318);
+            this.buttonSupDestination.Location = new System.Drawing.Point(477, 318);
             this.buttonSupDestination.Name = "buttonSupDestination";
             this.buttonSupDestination.Size = new System.Drawing.Size(27, 23);
             this.buttonSupDestination.TabIndex = 7;
@@ -128,7 +126,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(241, 243);
+            this.label1.Location = new System.Drawing.Point(136, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 10;
@@ -138,7 +136,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(238, 307);
+            this.label2.Location = new System.Drawing.Point(133, 307);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 11;
@@ -148,7 +146,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(390, 344);
+            this.label3.Location = new System.Drawing.Point(285, 344);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(153, 13);
             this.label3.TabIndex = 12;
@@ -157,7 +155,7 @@
             // dateTimePickerDateDebut
             // 
             this.dateTimePickerDateDebut.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDateDebut.Location = new System.Drawing.Point(244, 88);
+            this.dateTimePickerDateDebut.Location = new System.Drawing.Point(139, 88);
             this.dateTimePickerDateDebut.Name = "dateTimePickerDateDebut";
             this.dateTimePickerDateDebut.Size = new System.Drawing.Size(117, 20);
             this.dateTimePickerDateDebut.TabIndex = 13;
@@ -166,7 +164,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(241, 53);
+            this.label4.Location = new System.Drawing.Point(136, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(329, 13);
             this.label4.TabIndex = 14;
@@ -175,7 +173,7 @@
             // dateTimePickerDateFin
             // 
             this.dateTimePickerDateFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDateFin.Location = new System.Drawing.Point(426, 88);
+            this.dateTimePickerDateFin.Location = new System.Drawing.Point(321, 88);
             this.dateTimePickerDateFin.Name = "dateTimePickerDateFin";
             this.dateTimePickerDateFin.Size = new System.Drawing.Size(117, 20);
             this.dateTimePickerDateFin.TabIndex = 16;
@@ -184,7 +182,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(377, 95);
+            this.label5.Location = new System.Drawing.Point(272, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 13);
             this.label5.TabIndex = 17;
@@ -193,32 +191,22 @@
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Num,
-            this.trouvé,
-            this.Fichier});
+            this.NumFA});
             this.listView1.Location = new System.Drawing.Point(12, 34);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(201, 404);
+            this.listView1.Size = new System.Drawing.Size(113, 404);
             this.listView1.TabIndex = 18;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // Num
+            // NumFA
             // 
-            this.Num.Text = "Num";
-            // 
-            // trouvé
-            // 
-            this.trouvé.Text = "trouvé";
-            // 
-            // Fichier
-            // 
-            this.Fichier.Text = "fichier";
-            this.Fichier.Width = 80;
+            this.NumFA.Text = "Num facture";
+            this.NumFA.Width = 70;
             // 
             // buttonCharger
             // 
-            this.buttonCharger.Location = new System.Drawing.Point(70, 452);
+            this.buttonCharger.Location = new System.Drawing.Point(22, 453);
             this.buttonCharger.Name = "buttonCharger";
             this.buttonCharger.Size = new System.Drawing.Size(75, 23);
             this.buttonCharger.TabIndex = 19;
@@ -228,16 +216,17 @@
             // 
             // textBoxNomFichierCommencePar
             // 
-            this.textBoxNomFichierCommencePar.Location = new System.Drawing.Point(239, 149);
+            this.textBoxNomFichierCommencePar.Location = new System.Drawing.Point(134, 149);
             this.textBoxNomFichierCommencePar.Name = "textBoxNomFichierCommencePar";
             this.textBoxNomFichierCommencePar.Size = new System.Drawing.Size(370, 20);
             this.textBoxNomFichierCommencePar.TabIndex = 20;
+            this.textBoxNomFichierCommencePar.Leave += new System.EventHandler(this.textBoxNomFichierCommencePar_Leave);
             // 
             // labelNomFichierCommencePar
             // 
             this.labelNomFichierCommencePar.AutoSize = true;
             this.labelNomFichierCommencePar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNomFichierCommencePar.Location = new System.Drawing.Point(238, 133);
+            this.labelNomFichierCommencePar.Location = new System.Drawing.Point(133, 133);
             this.labelNomFichierCommencePar.Name = "labelNomFichierCommencePar";
             this.labelNomFichierCommencePar.Size = new System.Drawing.Size(350, 13);
             this.labelNomFichierCommencePar.TabIndex = 21;
@@ -247,7 +236,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(236, 187);
+            this.label6.Location = new System.Drawing.Point(131, 187);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(242, 13);
             this.label6.TabIndex = 23;
@@ -255,24 +244,24 @@
             // 
             // textBoxPremiereLigneCommencePar
             // 
-            this.textBoxPremiereLigneCommencePar.Location = new System.Drawing.Point(237, 203);
+            this.textBoxPremiereLigneCommencePar.Location = new System.Drawing.Point(132, 203);
             this.textBoxPremiereLigneCommencePar.Name = "textBoxPremiereLigneCommencePar";
             this.textBoxPremiereLigneCommencePar.Size = new System.Drawing.Size(370, 20);
             this.textBoxPremiereLigneCommencePar.TabIndex = 22;
+            this.textBoxPremiereLigneCommencePar.Leave += new System.EventHandler(this.textBoxPremiereLigneCommencePar_Leave);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(670, 43);
+            this.dataGridView1.Location = new System.Drawing.Point(529, 43);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(344, 404);
+            this.dataGridView1.Size = new System.Drawing.Size(543, 404);
             this.dataGridView1.TabIndex = 24;
-            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1059, 523);
+            this.ClientSize = new System.Drawing.Size(1102, 502);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxPremiereLigneCommencePar);
@@ -307,8 +296,6 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem paramToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBoxWorkingDirectory;
         private System.Windows.Forms.Button buttonPathSource;
         private System.Windows.Forms.ComboBox comboBoxdestination;
@@ -324,10 +311,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerDateFin;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader Num;
-        private System.Windows.Forms.ColumnHeader trouvé;
+        private System.Windows.Forms.ColumnHeader NumFA;
         private System.Windows.Forms.Button buttonCharger;
-        private System.Windows.Forms.ColumnHeader Fichier;
         private System.Windows.Forms.TextBox textBoxNomFichierCommencePar;
         private System.Windows.Forms.Label labelNomFichierCommencePar;
         private System.Windows.Forms.Label label6;
