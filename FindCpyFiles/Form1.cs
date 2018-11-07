@@ -40,7 +40,7 @@ namespace FindCpyFiles
             //fp.setRef();//methode implementer dans la classe form2 pour lien vers this (le pere)
             fldc.Tag = this;
             fldc.setRef();
-            fa.textBox1.Text = "N° fac" + "\t" + "nomfic" + "\t\t" + "numLigne" + Environment.NewLine;
+            //fa.textBox1.Text = "N° fac" + "\t" + "nomfic" + "\t\t" + "numLigne" + Environment.NewLine;
             dataGridView1.DataSource = ListResultatPourGridView;
             appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             appDataArterris = Path.Combine(appdata, "Arterris");
@@ -240,28 +240,55 @@ namespace FindCpyFiles
 
         private void traiterFichierEnCours(String fichier, DateTime dtModifFile)
         {
+            labelFichierEnCoursAnalyse.Text = fichier;
+            labelFichierEnCoursAnalyse.Refresh();
             String[] Lines;
             Lines = File.ReadAllLines(fichier);
-            //int nbtrouve = 0;
-
+            
             if (!Lines[0].StartsWith(this.textBoxPremiereLigneCommencePar.Text))//si la 1 er ligne ne commence pas par on rend la main
                 return;
 
+            HashSet<string> trouve = new HashSet<string>();
+            HashSet<string> nonTrouve = new HashSet<string>();
 
             for (int l = 0; l < Lines.Length; l++)
             {
                 String numFaOfThisLine = Lines[l].Substring(88, 6);
                 if (this.sortedSetDesNumFacturesAchercher.Contains(numFaOfThisLine))//le num facture des cette ligne est'il dans la liste des factures recherchés
                 {//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
-                    this.sortedSetDesNumFacturesAchercher.Remove(numFaOfThisLine);
-                    this.hashSetOfFilesToCopy.Add(fichier);//on rajoute ce fichier à la liste des fichiers à copier à la fin
-                    //ajouterElementTrouveSurSortie(numFaOfThisLine, fichier, l);
+
                     ajouterElementTrouvedansGridView(numFaOfThisLine, true, fichier, l, dtModifFile);
-                    //nbtrouve++;
+                    trouve.Add(numFaOfThisLine);
+                }
+                else
+                {//on est sur une ligne qui ne fait pas partie des num à chercher
+                    nonTrouve.Add(numFaOfThisLine);
+                }
+
+                if (trouve.Count > 0) 
+                {//on en a trouvé au moins 1
+                    dataGridView1.Refresh();
+                    foreach (string item in trouve)
+                    {
+                        this.sortedSetDesNumFacturesAchercher.Remove(item);
+                    }
+                    
+                    if (nonTrouve.Count > 0)//il y a dans ce fichier des certains numéro qui ne font pas partie de la liste, ce n'est pas normal
+                    {
+                        fa.textBox1.AppendText("Le fichier " + fichier + "contient des factures de la liste et les factures ci dessous qui n'y sont pas :"+ Environment.NewLine);
+                        foreach (string item in nonTrouve)
+                        {
+                            fa.textBox1.AppendText(item + Environment.NewLine);
+                        }
+
+                    }
+
                 }
 
             }
 
+            trouve = null;
+            nonTrouve = null;
             //Console.WriteLine("nblignes fichier :" + Lines.Length + "nb lignes qui matches : " + nbtrouve.ToString());
         }
 

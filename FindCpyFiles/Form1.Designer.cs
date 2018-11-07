@@ -51,6 +51,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxPremiereLigneCommencePar = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.labelstaticAnalyse = new System.Windows.Forms.Label();
+            this.labelFichierEnCoursAnalyse = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,7 +96,7 @@
             // 
             // buttonExecuter
             // 
-            this.buttonExecuter.Location = new System.Drawing.Point(253, 400);
+            this.buttonExecuter.Location = new System.Drawing.Point(242, 453);
             this.buttonExecuter.Name = "buttonExecuter";
             this.buttonExecuter.Size = new System.Drawing.Size(75, 23);
             this.buttonExecuter.TabIndex = 5;
@@ -259,9 +261,29 @@
             this.dataGridView1.Size = new System.Drawing.Size(543, 404);
             this.dataGridView1.TabIndex = 24;
             // 
+            // labelstaticAnalyse
+            // 
+            this.labelstaticAnalyse.AutoSize = true;
+            this.labelstaticAnalyse.Location = new System.Drawing.Point(136, 371);
+            this.labelstaticAnalyse.Name = "labelstaticAnalyse";
+            this.labelstaticAnalyse.Size = new System.Drawing.Size(135, 13);
+            this.labelstaticAnalyse.TabIndex = 25;
+            this.labelstaticAnalyse.Text = "Fichier en cours d\'analyse :";
+            // 
+            // labelFichierEnCoursAnalyse
+            // 
+            this.labelFichierEnCoursAnalyse.AutoSize = true;
+            this.labelFichierEnCoursAnalyse.Location = new System.Drawing.Point(136, 395);
+            this.labelFichierEnCoursAnalyse.Name = "labelFichierEnCoursAnalyse";
+            this.labelFichierEnCoursAnalyse.Size = new System.Drawing.Size(54, 13);
+            this.labelFichierEnCoursAnalyse.TabIndex = 26;
+            this.labelFichierEnCoursAnalyse.Text = "c:\\abcdef";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1102, 502);
+            this.Controls.Add(this.labelFichierEnCoursAnalyse);
+            this.Controls.Add(this.labelstaticAnalyse);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxPremiereLigneCommencePar);
@@ -318,6 +340,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxPremiereLigneCommencePar;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label labelstaticAnalyse;
+        private System.Windows.Forms.Label labelFichierEnCoursAnalyse;
     }
 }
 
