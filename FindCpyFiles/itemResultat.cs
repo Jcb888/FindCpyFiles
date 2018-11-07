@@ -13,19 +13,19 @@ namespace FindCpyFiles
 
         }
 
-        public itemResultat(string n, bool t, string nf, int l, DateTime dm)
+        public itemResultat(string n, bool t, string nf, DateTime dm)
         {
             numFA = n;
             trouve = t;
             nomfichier = nf;
-            ligne = l;
+            //ligne = l;
             dateModif = dm;
         }
 
         public string numFA { get; set; }
         public bool trouve { get; set; }
         public string nomfichier { get; set; }
-        public int ligne{ get; set; }
+        //public int ligne{ get; set; }
         public DateTime dateModif { get; set; }
 
     }

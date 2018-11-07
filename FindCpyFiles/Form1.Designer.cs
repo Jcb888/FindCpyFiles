@@ -258,7 +258,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(529, 43);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(543, 404);
+            this.dataGridView1.Size = new System.Drawing.Size(480, 404);
             this.dataGridView1.TabIndex = 24;
             // 
             // labelstaticAnalyse
@@ -275,13 +275,13 @@
             this.labelFichierEnCoursAnalyse.AutoSize = true;
             this.labelFichierEnCoursAnalyse.Location = new System.Drawing.Point(136, 395);
             this.labelFichierEnCoursAnalyse.Name = "labelFichierEnCoursAnalyse";
-            this.labelFichierEnCoursAnalyse.Size = new System.Drawing.Size(54, 13);
+            this.labelFichierEnCoursAnalyse.Size = new System.Drawing.Size(56, 13);
             this.labelFichierEnCoursAnalyse.TabIndex = 26;
-            this.labelFichierEnCoursAnalyse.Text = "c:\\abcdef";
+            this.labelFichierEnCoursAnalyse.Text = "En attente";
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(1102, 502);
+            this.ClientSize = new System.Drawing.Size(1058, 502);
             this.Controls.Add(this.labelFichierEnCoursAnalyse);
             this.Controls.Add(this.labelstaticAnalyse);
             this.Controls.Add(this.dataGridView1);

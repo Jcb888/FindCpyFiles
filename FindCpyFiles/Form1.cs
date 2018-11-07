@@ -249,38 +249,38 @@ namespace FindCpyFiles
                 return;
 
             HashSet<string> trouve = new HashSet<string>();
-            HashSet<string> nonTrouve = new HashSet<string>();
+            HashSet<string> pasDansLaListe = new HashSet<string>();
 
             for (int l = 0; l < Lines.Length; l++)
             {
                 String numFaOfThisLine = Lines[l].Substring(88, 6);
                 if (this.sortedSetDesNumFacturesAchercher.Contains(numFaOfThisLine))//le num facture des cette ligne est'il dans la liste des factures recherchés
                 {//oui on l'a trouvé on peut donc l'enlever elle n'est plus à chercher.
-
-                    ajouterElementTrouvedansGridView(numFaOfThisLine, true, fichier, l, dtModifFile);
+                    
                     trouve.Add(numFaOfThisLine);
                 }
                 else
                 {//on est sur une ligne qui ne fait pas partie des num à chercher
-                    nonTrouve.Add(numFaOfThisLine);
+                    pasDansLaListe.Add(numFaOfThisLine);
+                }
+            }
+
+            if (trouve.Count > 0)
+            {//on en a trouvé au moins 1
+                this.dataGridView1.Refresh();
+                foreach (string item in trouve)
+                {
+                    ajouterElementTrouvedansGridView(item, true, fichier, dtModifFile);
+                    this.sortedSetDesNumFacturesAchercher.Remove(item);
                 }
 
-                if (trouve.Count > 0) 
-                {//on en a trouvé au moins 1
-                    dataGridView1.Refresh();
-                    foreach (string item in trouve)
+                if (pasDansLaListe.Count > 0)//il y a dans ce fichier des nums factures qui font parties de la liste et d'autres non, ce n'est pas normal
+                {
+                    fa.textBox1.AppendText("Attention Le fichier " + fichier + "contient des factures de la liste et les factures ci dessous qui n'y sont pas :" + Environment.NewLine);
+                    foreach (string item in pasDansLaListe)
                     {
-                        this.sortedSetDesNumFacturesAchercher.Remove(item);
-                    }
-                    
-                    if (nonTrouve.Count > 0)//il y a dans ce fichier des certains numéro qui ne font pas partie de la liste, ce n'est pas normal
-                    {
-                        fa.textBox1.AppendText("Le fichier " + fichier + "contient des factures de la liste et les factures ci dessous qui n'y sont pas :"+ Environment.NewLine);
-                        foreach (string item in nonTrouve)
-                        {
-                            fa.textBox1.AppendText(item + Environment.NewLine);
-                        }
-
+                        fa.textBox1.AppendText(item + Environment.NewLine);
+                        fa.Show();
                     }
 
                 }
@@ -288,13 +288,13 @@ namespace FindCpyFiles
             }
 
             trouve = null;
-            nonTrouve = null;
+            pasDansLaListe = null;
             //Console.WriteLine("nblignes fichier :" + Lines.Length + "nb lignes qui matches : " + nbtrouve.ToString());
         }
 
-        private void ajouterElementTrouvedansGridView(string numFaOfThisLine, bool v, string fichier, int l, DateTime dtModifFile)
+        private void ajouterElementTrouvedansGridView(string numFaOfThisLine, bool v, string fichier, DateTime dtModifFile)
         {
-            itemResultat ir = new itemResultat(numFaOfThisLine, v, Path.GetFileName(fichier), l, dtModifFile);
+            itemResultat ir = new itemResultat(numFaOfThisLine, v, Path.GetFileName(fichier), dtModifFile);
             ListResultatPourGridView.Add(ir);
         }
 
@@ -602,7 +602,7 @@ namespace FindCpyFiles
         {
             foreach (string item in sortedSetDesNumFacturesAchercher)
             {
-                itemResultat ir = new itemResultat(item, false, "", 0, new DateTime(1900, 01, 01));
+                itemResultat ir = new itemResultat(item, false, "", new DateTime(1900, 01, 01));
                 ListResultatPourGridView.Add(ir);
 
             }
