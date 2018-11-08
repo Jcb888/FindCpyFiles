@@ -74,6 +74,10 @@ namespace FindCpyFiles
                 co.strCommencePar = "test";
                 this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
 
+                co.LastDateDebut = DateTime.Today.Date;
+                this.dateTimePickerDateDebut.Value = DateTime.Today.Date;
+
+
                 //co.ListContient.Add(new comboItem("1", "test"));
                 //co.strContient = "test";
                 //fp.comboBoxContient.Text = co.strContient;
@@ -124,6 +128,8 @@ namespace FindCpyFiles
         {
             foreach (String item in tabdesNumFa)
             {
+                if (item == "")
+                    continue;
                 try
                 {
                     this.sortedSetDesNumFacturesAchercher.Add(item);
@@ -143,7 +149,7 @@ namespace FindCpyFiles
 
         private void chargerHashSetCommencePar()
         {
-            String[] tab = this.textBoxNomFichierCommencePar.Text.Split(',');
+            String[] tab = this.textBoxNomFichierCommencePar.Text.Split(';');
             this.hashsetDebutFichierAchercher.Clear();
             foreach (String item in tab)
             {
@@ -171,7 +177,7 @@ namespace FindCpyFiles
             co.ListPathDestination.ForEach(i => comboBoxdestination.Items.Add(i));
             //co.listCommencePar.ForEach(i => fp.comboBoxCommencePar.Items.Add(i));
             //co.ListContient.ForEach(i => fp.comboBoxContient.Items.Add(i));
-
+            dateTimePickerDateDebut.Value = co.LastDateDebut;
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
             comboBoxdestination.Text = co.strPathDestination;
             textBoxNomFichierCommencePar.Text = co.strCommencePar;
@@ -240,6 +246,7 @@ namespace FindCpyFiles
 
         private void traiterFichierEnCours(String fichier, DateTime dtModifFile)
         {
+            string nomFichier = Path.GetFileName(fichier);
             labelFichierEnCoursAnalyse.Text = fichier;
             labelFichierEnCoursAnalyse.Refresh();
             String[] Lines;
@@ -267,7 +274,7 @@ namespace FindCpyFiles
 
             if (trouve.Count > 0)
             {//on en a trouvé au moins 1
-                this.dataGridView1.Refresh();
+                hashSetOfFilesToCopy.Add(fichier);
                 foreach (string item in trouve)
                 {
                     ajouterElementTrouvedansGridView(item, true, fichier, dtModifFile);
@@ -280,15 +287,17 @@ namespace FindCpyFiles
                     foreach (string item in pasDansLaListe)
                     {
                         fa.textBox1.AppendText(item + Environment.NewLine);
-                        fa.Show();
+                        Console.WriteLine(fichier +"\t"+ item);
+                        
                     }
-
+                    if (!fa.Visible)
+                        fa.Show();
                 }
-
+                this.dataGridView1.Refresh();
             }
 
-            trouve = null;
-            pasDansLaListe = null;
+            //trouve = null;
+            //pasDansLaListe = null;
             //Console.WriteLine("nblignes fichier :" + Lines.Length + "nb lignes qui matches : " + nbtrouve.ToString());
         }
 
@@ -382,6 +391,10 @@ namespace FindCpyFiles
 
             co.strCommencePar = textBoxNomFichierCommencePar.Text;
             co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
+            co.LastDateDebut = this.dateTimePickerDateDebut.Value;
+            co.strRepertoire2Travail = comboBoxWorkingDirectory.Text;
+            co.strPathDestination = comboBoxdestination.Text;
+
             //co.strContient = fp.comboBoxContient.Text;
 
             try
@@ -722,6 +735,7 @@ namespace FindCpyFiles
         public String strCommencePar;
         public String strContient;
         public String ligneCommencePar;
+        public DateTime LastDateDebut { get; set; }
         public List<comboItem> ListRepertoire2Travail;
         public List<comboItem> ListPathDestination;
         public List<comboItem> listCommencePar;
