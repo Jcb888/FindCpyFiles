@@ -49,10 +49,11 @@
             this.textBoxNomFichierCommencePar = new System.Windows.Forms.TextBox();
             this.labelNomFichierCommencePar = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxPremiereLigneCommencePar = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labelstaticAnalyse = new System.Windows.Forms.Label();
             this.labelFichierEnCoursAnalyse = new System.Windows.Forms.Label();
+            this.ComboBoxPremiereLigneCommencePar = new System.Windows.Forms.ComboBox();
+            this.buttonSupLigneCommencePar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +65,7 @@
             this.comboBoxWorkingDirectory.Size = new System.Drawing.Size(304, 21);
             this.comboBoxWorkingDirectory.TabIndex = 0;
             this.comboBoxWorkingDirectory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxWorkingDirectory_KeyDown);
+            this.comboBoxWorkingDirectory.Leave += new System.EventHandler(this.comboBoxWorkingDirectory_Leave);
             // 
             // buttonPathSource
             // 
@@ -83,6 +85,7 @@
             this.comboBoxdestination.Size = new System.Drawing.Size(304, 21);
             this.comboBoxdestination.TabIndex = 2;
             this.comboBoxdestination.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxdestination_KeyDown);
+            this.comboBoxdestination.Leave += new System.EventHandler(this.comboBoxdestination_Leave);
             // 
             // buttonPathDest
             // 
@@ -239,19 +242,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(131, 187);
+            this.label6.Location = new System.Drawing.Point(128, 183);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(242, 13);
             this.label6.TabIndex = 23;
             this.label6.Text = "Et dont la premiére ligne du fichier commence par :";
-            // 
-            // textBoxPremiereLigneCommencePar
-            // 
-            this.textBoxPremiereLigneCommencePar.Location = new System.Drawing.Point(132, 203);
-            this.textBoxPremiereLigneCommencePar.Name = "textBoxPremiereLigneCommencePar";
-            this.textBoxPremiereLigneCommencePar.Size = new System.Drawing.Size(370, 20);
-            this.textBoxPremiereLigneCommencePar.TabIndex = 22;
-            this.textBoxPremiereLigneCommencePar.Leave += new System.EventHandler(this.textBoxPremiereLigneCommencePar_Leave);
             // 
             // dataGridView1
             // 
@@ -280,14 +275,34 @@
             this.labelFichierEnCoursAnalyse.TabIndex = 26;
             this.labelFichierEnCoursAnalyse.Text = "En attente";
             // 
+            // ComboBoxPremiereLigneCommencePar
+            // 
+            this.ComboBoxPremiereLigneCommencePar.FormattingEnabled = true;
+            this.ComboBoxPremiereLigneCommencePar.Location = new System.Drawing.Point(131, 199);
+            this.ComboBoxPremiereLigneCommencePar.Name = "ComboBoxPremiereLigneCommencePar";
+            this.ComboBoxPremiereLigneCommencePar.Size = new System.Drawing.Size(304, 21);
+            this.ComboBoxPremiereLigneCommencePar.TabIndex = 27;
+            this.ComboBoxPremiereLigneCommencePar.Leave += new System.EventHandler(this.ComboBoxPremiereLigneCommencePar_Leave);
+            // 
+            // buttonSupLigneCommencePar
+            // 
+            this.buttonSupLigneCommencePar.Image = ((System.Drawing.Image)(resources.GetObject("buttonSupLigneCommencePar.Image")));
+            this.buttonSupLigneCommencePar.Location = new System.Drawing.Point(444, 199);
+            this.buttonSupLigneCommencePar.Name = "buttonSupLigneCommencePar";
+            this.buttonSupLigneCommencePar.Size = new System.Drawing.Size(27, 23);
+            this.buttonSupLigneCommencePar.TabIndex = 28;
+            this.buttonSupLigneCommencePar.UseVisualStyleBackColor = true;
+            this.buttonSupLigneCommencePar.Click += new System.EventHandler(this.buttonSupLigneCommencePar_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1019, 490);
+            this.Controls.Add(this.buttonSupLigneCommencePar);
+            this.Controls.Add(this.ComboBoxPremiereLigneCommencePar);
             this.Controls.Add(this.labelFichierEnCoursAnalyse);
             this.Controls.Add(this.labelstaticAnalyse);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBoxPremiereLigneCommencePar);
             this.Controls.Add(this.labelNomFichierCommencePar);
             this.Controls.Add(this.textBoxNomFichierCommencePar);
             this.Controls.Add(this.buttonCharger);
@@ -339,10 +354,11 @@
         private System.Windows.Forms.TextBox textBoxNomFichierCommencePar;
         private System.Windows.Forms.Label labelNomFichierCommencePar;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxPremiereLigneCommencePar;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelstaticAnalyse;
         private System.Windows.Forms.Label labelFichierEnCoursAnalyse;
+        private System.Windows.Forms.ComboBox ComboBoxPremiereLigneCommencePar;
+        private System.Windows.Forms.Button buttonSupLigneCommencePar;
     }
 }
 

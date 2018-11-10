@@ -47,31 +47,36 @@ namespace FindCpyFiles
             co.ListRepertoire2Travail = new List<comboItem>();
             co.ListPathDestination = new List<comboItem>();
             co.listCommencePar = new List<comboItem>();
+            co.listPremiereLigneCommencePar = new List<comboItem>();   
             //co.ListContient = new List<comboItem>();
             //co.bSousRepDest = true;
             co.strRepertoire2Travail = "";
             co.strPathDestination = "";
-            co.strCommencePar = "";
+            co.strNomFichierCommencePar = "";
             co.strContient = "";
             co.ligneCommencePar = "";
 
             if (!Directory.Exists(appDataArterris))
                 Directory.CreateDirectory(appDataArterris);
 
-            if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//si le fichier n'existe pas on le cré avec init à "";
+            if (!File.Exists(appDataArterris + "\\configFindFilesV4.xml"))//si le fichier n'existe pas on le cré avec init à "";
             {
                 co.ListRepertoire2Travail.Add(new comboItem("1", @"c:\temp"));
-                co.strRepertoire2Travail = "c:\\temp";
+                co.strRepertoire2Travail = @"c:\temp";
                 comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
 
 
-                co.ListPathDestination.Add(new comboItem("1", @""));
+                co.ListPathDestination.Add(new comboItem("1", @"c:\temp"));
                 co.strPathDestination = @"c:\temp";
                 comboBoxdestination.Text = co.strPathDestination;
 
-                co.listCommencePar.Add(new comboItem("1", "test"));
-                co.strCommencePar = "test";
-                this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
+                co.listCommencePar.Add(new comboItem("1", "MB910;MB510"));
+                co.strNomFichierCommencePar = "MB910;MB510";
+                this.textBoxNomFichierCommencePar.Text = co.strNomFichierCommencePar;
+
+                co.listPremiereLigneCommencePar.Add(new comboItem("1", "LS"));
+                co.ligneCommencePar = "LS";
+                this.ComboBoxPremiereLigneCommencePar.Text = co.ligneCommencePar;
 
                 co.LastDateDebut = DateTime.Today.Date;
                 this.dateTimePickerDateDebut.Value = DateTime.Today.Date;
@@ -79,31 +84,15 @@ namespace FindCpyFiles
                 co.LastDateFin = DateTime.Today.Date;
                 this.dateTimePickerDateFin.Value = DateTime.Today.Date;
 
-                co.strCommencePar = "MB910;MB510";
-                this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
+                co.strNomFichierCommencePar = "MB910;MB510";
+                this.textBoxNomFichierCommencePar.Text = co.strNomFichierCommencePar;
 
-                //co.ListContient.Add(new comboItem("1", "test"));
-                //co.strContient = "test";
-                //fp.comboBoxContient.Text = co.strContient;
+                
 
-                //co.checkTest1 = true;
-                //fp.checkBoxTest1.Checked = co.checkTest1;
-
-                //co.checkTest2 = true;
-                //fp.checkBoxtest2.Checked = co.checkTest2;
-
-                //co.bSousRepDest = true;
-                //checkBoxSousRep.Checked = true;
-
-                //co.bSimulation = false;
-                //checkBoxSimulation.Checked = co.bSimulation;
-
-                co.ligneCommencePar = "LS";
-
-                if (!File.Exists(appDataArterris + "\\configFindFiles.xml"))//creation
+                if (!File.Exists(appDataArterris + "\\configFindFilesV4.xml"))//creation
                 {
 
-                    using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configFindFiles.xml"))
+                    using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configFindFilesV4.xml"))
                     {
                         xs.Serialize(wr, co);
                     }
@@ -112,14 +101,14 @@ namespace FindCpyFiles
 
             }
 
-            using (StreamReader rd = new StreamReader(appDataArterris + "\\configFindFiles.xml"))
+            using (StreamReader rd = new StreamReader(appDataArterris + "\\configFindFilesV4.xml"))
             {
                 co = xs.Deserialize(rd) as configObject;
 
             }
 
             remplirCombo();
-            chargerHashSetCommencePar();
+            chargerHashSetNomFichierCommencePar();
 
         }
 
@@ -151,7 +140,7 @@ namespace FindCpyFiles
 
         }
 
-        private void chargerHashSetCommencePar()
+        private void chargerHashSetNomFichierCommencePar()
         {
             String[] tab = this.textBoxNomFichierCommencePar.Text.Split(';');
             this.hashsetDebutFichierAchercher.Clear();
@@ -179,20 +168,15 @@ namespace FindCpyFiles
 
             co.ListRepertoire2Travail.ForEach(i => comboBoxWorkingDirectory.Items.Add(i));
             co.ListPathDestination.ForEach(i => comboBoxdestination.Items.Add(i));
-            //co.listCommencePar.ForEach(i => fp.comboBoxCommencePar.Items.Add(i));
-            //co.ListContient.ForEach(i => fp.comboBoxContient.Items.Add(i));
+            co.listPremiereLigneCommencePar.ForEach(i => ComboBoxPremiereLigneCommencePar.Items.Add(i));
+
             dateTimePickerDateDebut.Value = co.LastDateDebut;
             dateTimePickerDateFin.Value = co.LastDateFin;
+
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
             comboBoxdestination.Text = co.strPathDestination;
-            textBoxNomFichierCommencePar.Text = co.strCommencePar;
-            //fp.comboBoxContient.Text = co.strContient;
-
-            //fp.checkBoxTest1.Checked = co.checkTest1;
-            //fp.checkBoxtest2.Checked = co.checkTest2;
-            textBoxPremiereLigneCommencePar.Text = co.ligneCommencePar;
-            //checkBoxSousRep.Checked = co.bSousRepDest;
-            //checkBoxSimulation.Checked = co.bSimulation;
+            textBoxNomFichierCommencePar.Text = co.strNomFichierCommencePar;
+            ComboBoxPremiereLigneCommencePar.Text = co.ligneCommencePar;
         }
 
         //public void setCOcheckTest1(bool b)
@@ -222,7 +206,7 @@ namespace FindCpyFiles
             //    //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
             //    comboItem ci = new comboItem(((co.listCommencePar.Count) + 1).ToString(), fp.comboBoxCommencePar.Text);
             //    co.listCommencePar.Add(ci);
-            //    co.strCommencePar = textBoxNomFichierCommencePar.Text;
+            //    co.strNomFichierCommencePar = textBoxNomFichierCommencePar.Text;
             //    fp.comboBoxCommencePar.Items.Add(ci);
             //    fp.comboBoxCommencePar.SelectedIndex = fp.comboBoxCommencePar.FindStringExact(ci.myValue);
             //}
@@ -257,7 +241,7 @@ namespace FindCpyFiles
             String[] Lines;
             Lines = File.ReadAllLines(fichier);
             
-            if (!Lines[0].StartsWith(this.textBoxPremiereLigneCommencePar.Text))//si la 1 er ligne ne commence pas par on rend la main
+            if (!Lines[0].StartsWith(this.ComboBoxPremiereLigneCommencePar.Text))//si la 1 er ligne ne commence pas par on rend la main
                 return;
 
             HashSet<string> trouve = new HashSet<string>();
@@ -288,7 +272,7 @@ namespace FindCpyFiles
 
                 if (pasDansLaListe.Count > 0)//il y a dans ce fichier des nums factures qui font parties de la liste et d'autres non, ce n'est pas normal
                 {
-                    fa.textBox1.AppendText("Attention Le fichier " + fichier + "contient des factures de la liste et les factures ci dessous qui n'y sont pas :" + Environment.NewLine);
+                    fa.textBox1.AppendText("Attention Le fichier " + fichier + " contient des num. de facture de la liste à chercher"+Environment.NewLine+ " et les numéros de facture ci dessous qui n'y sont pas :" + Environment.NewLine);
                     foreach (string item in pasDansLaListe)
                     {
                         fa.textBox1.AppendText(item + Environment.NewLine);
@@ -393,21 +377,19 @@ namespace FindCpyFiles
 
             if (co == null)//un min de verif qd mm
                 return;
-
-            co.strCommencePar = textBoxNomFichierCommencePar.Text;
-            co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
+            // sauvegarde des 
+            co.strNomFichierCommencePar = textBoxNomFichierCommencePar.Text;
+            co.ligneCommencePar = ComboBoxPremiereLigneCommencePar.Text;
             co.LastDateDebut = this.dateTimePickerDateDebut.Value;
             co.LastDateFin = this.dateTimePickerDateFin.Value;
             co.strRepertoire2Travail = comboBoxWorkingDirectory.Text;
             co.strPathDestination = comboBoxdestination.Text;
 
-            //co.strContient = fp.comboBoxContient.Text;
-
             try
             {
 
                 XmlSerializer xs = new XmlSerializer(typeof(configObject));
-                using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configFindFiles.xml"))
+                using (StreamWriter wr = new StreamWriter(appDataArterris + "\\configFindFilesV4.xml"))
                 {
                     xs.Serialize(wr, co);
                 }
@@ -489,9 +471,9 @@ namespace FindCpyFiles
                 return;
             }
 
-            if (this.textBoxPremiereLigneCommencePar.Text == "")
+            if (this.ComboBoxPremiereLigneCommencePar.Text == "")
             {
-                MessageBox.Show("1 er ligne du fichier commence par est vide sortie");
+                MessageBox.Show("Le combobox 1 er ligne du fichier commence par est vide sortie");
                 return;
             }
 
@@ -573,7 +555,7 @@ namespace FindCpyFiles
                     MessageBox.Show("Le fichier source non trouve : " + fnfe.StackTrace.ToString());
                 }
 
-                catch (IOException ioe)
+                catch (IOException)
                 {
                     DialogResult result = MessageBox.Show("Le fichier existe déja dans la destination " + Environment.NewLine + " vous devrier utiliser l'option créer sous répertoire !", "ATTENTION !", MessageBoxButtons.YesNoCancel);
                     switch (result)
@@ -677,12 +659,52 @@ namespace FindCpyFiles
 
         private void textBoxNomFichierCommencePar_Leave(object sender, EventArgs e)
         {
-            co.strCommencePar = textBoxNomFichierCommencePar.Text;
+            co.strNomFichierCommencePar = textBoxNomFichierCommencePar.Text;
         }
 
-        private void textBoxPremiereLigneCommencePar_Leave(object sender, EventArgs e)
+        //private void textBoxPremiereLigneCommencePar_Leave(object sender, EventArgs e)
+        //{
+        //    co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
+        //}
+
+        private void ComboBoxPremiereLigneCommencePar_Leave(object sender, EventArgs e)
         {
-            co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
+            if (ComboBoxPremiereLigneCommencePar.Text == "")
+            {
+                return;
+            }
+
+            bool b = co.listPremiereLigneCommencePar.Any(tr => tr.myValue.Equals(ComboBoxPremiereLigneCommencePar.Text, StringComparison.CurrentCultureIgnoreCase));
+            if (!b)
+            {
+                //KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(((DicdepotDirectory.Count) + 1).ToString(), comboBoxDepot.Text);
+                comboItem ci = new comboItem(((co.listPremiereLigneCommencePar.Count) + 1).ToString(), ComboBoxPremiereLigneCommencePar.Text);
+                co.listPremiereLigneCommencePar.Add(ci);
+                ComboBoxPremiereLigneCommencePar.Items.Add(ci);
+                ComboBoxPremiereLigneCommencePar.SelectedIndex = comboBoxWorkingDirectory.FindStringExact(ci.myValue);
+            }
+        }
+
+        private void buttonSupLigneCommencePar_Click(object sender, EventArgs e)
+        {
+            if (ComboBoxPremiereLigneCommencePar.SelectedIndex != -1)
+            {
+                co.ListRepertoire2Travail.RemoveAll(x => x.myValue.Contains(this.ComboBoxPremiereLigneCommencePar.Text));
+                ComboBoxPremiereLigneCommencePar.Items.RemoveAt(ComboBoxPremiereLigneCommencePar.SelectedIndex);
+                if (ComboBoxPremiereLigneCommencePar.Items.Count < 1)
+                    return;
+                ComboBoxPremiereLigneCommencePar.SelectedIndex = 0;
+            }
+        }
+
+        private void comboBoxWorkingDirectory_Leave(object sender, EventArgs e)
+        {
+            ajouterWorkinglistCombo();
+        }
+
+        private void comboBoxdestination_Leave(object sender, EventArgs e)
+        {
+            ajouterDestinationlistCombo();
         }
 
         //private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -738,7 +760,7 @@ namespace FindCpyFiles
         //public bool bSimulation;
         public String strRepertoire2Travail;
         public String strPathDestination;
-        public String strCommencePar;
+        public String strNomFichierCommencePar;
         public String strContient;
         public String ligneCommencePar;
         public DateTime LastDateDebut { get; set; }
@@ -746,11 +768,12 @@ namespace FindCpyFiles
         public List<comboItem> ListRepertoire2Travail;
         public List<comboItem> ListPathDestination;
         public List<comboItem> listCommencePar;
+        public List<comboItem> listPremiereLigneCommencePar;
         //public List<comboItem> ListContient;
 
     }
 
-    [Serializable]
+    [Serializable] // pour pouvoir serialiser les comboitem des List du configobject
     public class comboItem
     {
         public comboItem()
