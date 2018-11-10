@@ -11,8 +11,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.IO;
 
-// ToDo charger par defaut dernier utilisé.
-// ToDo supprimer item fenetre fille
+//Passer en combo nom debut fichier
 
 namespace FindCpyFiles
 {
@@ -77,6 +76,11 @@ namespace FindCpyFiles
                 co.LastDateDebut = DateTime.Today.Date;
                 this.dateTimePickerDateDebut.Value = DateTime.Today.Date;
 
+                co.LastDateFin = DateTime.Today.Date;
+                this.dateTimePickerDateFin.Value = DateTime.Today.Date;
+
+                co.strCommencePar = "MB910;MB510";
+                this.textBoxNomFichierCommencePar.Text = co.strCommencePar;
 
                 //co.ListContient.Add(new comboItem("1", "test"));
                 //co.strContient = "test";
@@ -178,6 +182,7 @@ namespace FindCpyFiles
             //co.listCommencePar.ForEach(i => fp.comboBoxCommencePar.Items.Add(i));
             //co.ListContient.ForEach(i => fp.comboBoxContient.Items.Add(i));
             dateTimePickerDateDebut.Value = co.LastDateDebut;
+            dateTimePickerDateFin.Value = co.LastDateFin;
             comboBoxWorkingDirectory.Text = co.strRepertoire2Travail;
             comboBoxdestination.Text = co.strPathDestination;
             textBoxNomFichierCommencePar.Text = co.strCommencePar;
@@ -392,6 +397,7 @@ namespace FindCpyFiles
             co.strCommencePar = textBoxNomFichierCommencePar.Text;
             co.ligneCommencePar = textBoxPremiereLigneCommencePar.Text;
             co.LastDateDebut = this.dateTimePickerDateDebut.Value;
+            co.LastDateFin = this.dateTimePickerDateFin.Value;
             co.strRepertoire2Travail = comboBoxWorkingDirectory.Text;
             co.strPathDestination = comboBoxdestination.Text;
 
@@ -489,7 +495,7 @@ namespace FindCpyFiles
                 return;
             }
 
-            string[] tabFiles = Directory.GetFiles(comboBoxWorkingDirectory.Text, "*.");
+            string[] tabFiles = Directory.GetFiles(comboBoxWorkingDirectory.Text, "MB*.");
             hashSetOfFilesToCopy.Clear();
 
             foreach (String file in tabFiles)
@@ -736,6 +742,7 @@ namespace FindCpyFiles
         public String strContient;
         public String ligneCommencePar;
         public DateTime LastDateDebut { get; set; }
+        public DateTime LastDateFin { get; set; }
         public List<comboItem> ListRepertoire2Travail;
         public List<comboItem> ListPathDestination;
         public List<comboItem> listCommencePar;
